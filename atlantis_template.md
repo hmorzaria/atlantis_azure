@@ -178,3 +178,47 @@ cd atlantismain
 #
     sudo waagent -deprovision+user
     exit
+    
+## 8. Create image template
+#### Following https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/
+#
+##### The following steps assume you already have installed Azure Command Line tools (Azure CLI)
+##### The Azure Command Line interface tools are needed to manage virtual machines; this is a OS-independent library. These tools are already installed in the virtual machine named VM manager that can be called up from the Azure portal
+If not installed, the Azure CLI is available from https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/   
+Install Node.js first available from https://nodejs.org/en/download/package-manager/
+
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    sudo npm install azure-cli -g
+Log into the Azure account
+
+    azure login
+ 
+ Switch to Resource Manager mode
+ 
+    azure config mode arm
+
+##### Once Azure CLI is installed continue here 
+
+##### Stop the VM which you already deprovisioned 
+#
+    azure vm deallocate -g <your-resource-group-name> -n <your-virtual-machine-name>
+    
+> for example azure vm deallocate -g 'Datascience' -n 'Datasciencemachine'
+
+##### Generalize the VM with the following command:
+
+    azure vm generalize –g <your-resource-group-name> -n <your-virtual-machine-name>
+
+> for example azure vm generalize –g 'Datascience' -n 'Datasciencemachine'
+
+##### Now capture the image and a local file template
+
+    azure vm capture <your-resource-group-name> <your-virtual-machine-name> <your-vhd-name-prefix> -t <path-to-your-template-file-name.json>
+
+You need to assign all images a prefix, use your lastname
+> for example azure vm capture 'Datascience' 'Datasciencemachine' lastname -t azurevmlastnametemplate.json
+
+This command creates a generalized OS image, using the VHD name prefix you specify for the VM disks. The image VHD files get created by default in the same storage account that the original VM used. (The VHDs for any new VMs you create from the image will be stored in the same account.) The -t option creates a local JSON file template you can use to create a new VM from the image.
+
+The json file will be stored in the VM and the storage account. To find the location of an image, open the JSON file template. In the storageProfile, find the uri of the image located in the system container. For example, the uri of the OS disk image is similar to https://xxxxxxxxxxxxxx.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/<your-vhd-name-prefix>-osDisk.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.vhd.
