@@ -2,58 +2,65 @@
 ### Atlantis template created using atlantis_template.md
 #### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
 
-### 1. Install Azure Command Line tools (Azure CLI)
+### OPTIONAL. Install Azure Command Line tools (Azure CLI)
+##### The Azure Command Line interface tools are needed to manage virtual machines; this is a OS-independent library. These tools are already installed in the virtual machine named VM manager that can be called up from the Azure portal
 
-##### The Azure Command Line interface tools are needed to manage virtual machines; this is a OS-independent library.
-
-The Azure CLI is available from https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
-
+The Azure CLI is available from https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/   
 Install Node.js first available from https://nodejs.org/en/download/package-manager/
 
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     sudo apt-get install -y nodejs
-    npm install azure-cli -g
-    
+    sudo npm install azure-cli -g
+Log into the Azure account
+
+    azure login
+ 
+ Switch to Resource Manager mode
+ 
+    azure config mode arm
 
 ### 1. Create new VMs from template
 ##### New VMs should be in same resource group as the image template and in same region
-##### Also always use the same virtual network and subnet
+##### Also always use the same virtual network and default subnet
 Regions are centralus, westus, eastus
 
 ##### OPTIONAL:  use these to create new network and subnet
 #
      azure network vnet create <your-new-resource-group-name> <your-vnet-name> -l "region"
      azure network vnet subnet create <your-new-resource-group-name> <your-vnet-name> <your-subnet-name>
-> for example: azure network vnet subnet create 'DataScience' 'DataScience' 'climateSubnet'
+> for example: azure network vnet subnet create 'DataScience' 'DataScience' 'default'
 
-##### Can also just use default subnet (rather than naming one)
-#
-##### Create public IP 
+##### A. Create public IP 
 #
      azure network public-ip create <your-new-resource-group-name> <your-ip-name> -l "region"
 
-> for example: azure network public-ip create 'DataScience' datamodelrep3 -l "westus"
-##### Create Network interface
+> for example: azure network public-ip create 'DataScience' datamodelrep4 -l "westus"
+##### B. Create network interface (NIC)
+
+###### Every VM requires a new NIC otherwise you will get an error
 #
      azure network nic create <your-new-resource-group-name> <your-nic-name> -k <your-subnetname> -m <your-vnet-name> -p <your-ip-name> -l "region"
 
-> for example: azure network nic create 'DataScience' 'datanic3' -k 'default' -m 'DataScience' -p datamodelrep3 -l "westus"
-##### From the output copy the nic ID
-##### It will be a string similar to this.
+> for example: azure network nic create 'DataScience' 'datanic4' -k 'default' -m 'DataScience' -p datamodelrep4 -l "westus"
+##### C. From the output copy the nic ID
+##### Scroll up, to the field ID, it will be a string similar to this. Copy starting in '/subscriptions'
 #
-> /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
+> data:  Id  : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
-##### Need to edit the image json file 
-##### Increase the last digit in the uri for the vhd
-sudo nano myimage.json
+##### D. Copy the image json file and edit the new version
+###### Increase the last digit in the uri for the vhd
+#
+    cp myimage.json newmyimage.json
+    sudo nano myimage.json
 
-##### Create new deployment
+##### E. Create new deployment
 #
      azure group deployment create <your-new-resource-group-name> <your-new-deployment-name> -f <your-template-file-name.json>
 
 > for example: azure group deployment create 'DataScience' 'deployanalysistemplate3' -f myimage.json
 
-##### You will be prompted to supply a new VM name, the admin user name and password, and the Id of the NIC you created previously.
+##### F. Fill in requested fields
+Supply a new VM name, the admin user name and password, and the Id of the NIC you created previously.
 ###### vmName
 > myvmrep
 ###### adminUserName
