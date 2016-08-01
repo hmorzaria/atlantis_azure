@@ -2,12 +2,25 @@
 ### Atlantis template created using atlantis_template.md
 #### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
 
+### 1. Install Azure Command Line tools (Azure CLI)
+
+##### The Azure Command Line interface tools are needed to manage virtual machines; this is a OS-independent library.
+
+The Azure CLI is available from https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
+
+Install Node.js first available from https://nodejs.org/en/download/package-manager/
+
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    npm install azure-cli -g
+    
+
 ### 1. Create new VMs from template
-##### New VMs should be in same resource group as image and in same region
+##### New VMs should be in same resource group as the image template and in same region
+##### Also always use the same virtual network and subnet
 Regions are centralus, westus, eastus
-##### It is easier to also use the same virtual network
-#
-##### Use these to create new network and subnet
+
+##### OPTIONAL:  use these to create new network and subnet
 #
      azure network vnet create <your-new-resource-group-name> <your-vnet-name> -l "region"
      azure network vnet subnet create <your-new-resource-group-name> <your-vnet-name> <your-subnet-name>
