@@ -49,17 +49,19 @@ Regions are centralus, westus, eastus
 > data:  Id  : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
 ##### D. Copy the image json file and edit the new version
-###### Increase the last digit in the uri for the vhd
+###### Increase the last digit in the uri for the vhd, after entering the editor, scroll rigth, until you find a string that starts with URI, then change the last digit before the extension.
 #
     cp myimage.json newmyimage.json
     sudo nano myimage.json
-
+###### To exit the editor CTRL+X
+#
 ##### E. Create new deployment
 #
      azure group deployment create <your-new-resource-group-name> <your-new-deployment-name> -f <your-template-file-name.json>
 
 > for example: azure group deployment create 'DataScience' 'deployanalysistemplate3' -f myimage.json
-
+##### The json file is the one you created when imaging your machine
+#
 ##### F. Fill in requested fields
 Supply a new VM name, the admin user name and password, and the Id of the NIC you created previously.
 ###### vmName
