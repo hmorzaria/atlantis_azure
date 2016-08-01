@@ -213,7 +213,7 @@ Log into the Azure account
 > for example azure vm generalize –g 'Datascience' -n 'Datasciencemachine'
 
 ##### Now capture the image and a local file template
-
+#
     azure vm capture <your-resource-group-name> <your-virtual-machine-name> <your-vhd-name-prefix> -t <path-to-your-template-file-name.json>
 
 You need to assign all images a prefix, use your lastname
