@@ -3,6 +3,7 @@
 #### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
 
 ### The following steps assume you already have installed Azure Command Line tools (Azure CLI)
+##### No need to follow these steps if you are working from the VM manager machine
 ##### The Azure Command Line interface tools are needed to manage virtual machines; this is a OS-independent library. These tools are already installed in the virtual machine named VM manager that can be called up from the Azure portal
 
 The Azure CLI is available from https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/   
