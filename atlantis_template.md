@@ -227,7 +227,7 @@ Log into the Azure account. Follow the prompts, you will be directed to open a b
     azure vm capture <your-resource-group-name> <your-virtual-machine-name> <your-vhd-name-prefix> -t <path-to-your-template-file-name.json>
 
 You need to assign all images a prefix, use your lastname
-> for example azure vm capture 'Datascience' 'Datasciencemachine' lastname -t azurevmlastnametemplate.json
+> for example azure vm capture 'Datascience' 'Datasciencemachine' lastname -t azurevmlastnametemplate01.json
 
 This command creates a generalized OS image, using the VHD name prefix you specify for the VM disks. The image VHD files get created by default in the same storage account that the original VM used. (The VHDs for any new VMs you create from the image will be stored in the same account.) The -t option creates a local JSON file template you can use to create a new VM from the image.
 
