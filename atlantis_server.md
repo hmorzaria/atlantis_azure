@@ -11,6 +11,8 @@ It is good practice to periodically update system files
 
 ##### A. Start a screen session
 Screen sessions are persistent SSH session that can be checked from multiple computers
+These commands leave the instance on the SSH session in the other computer still attached 
+You can then log in and work can then be done as if back on the original terminal you began on for the task
 
 screen -S session_name
 > for example screen -S atlantis_session
@@ -43,87 +45,75 @@ Check the new executable is here
 
     ls -R |grep atlantis
 
-#convert all ascii files in the current directory to linux file format
-flip -uv *
-chmod +x goc_FINAL_V2_SpinUp_base.sh
-sh ./goc_FINAL_V2_SpinUp_base.sh
+Convert all ascii files in the current directory to linux file format
 
-#check the new exe is there
+    flip -uv *
+
+Give sh bash file executable status
+
+    chmod +x atlantis_model_run1.sh
+
+Run bash file
+
+    sh ./atlantis_model_run1.sh
 
 
 #to rename file
 #mv gom_1980.sh.txt gom_1980.sh
 
 
-## to check on the Atlantis run from a different computer
-#following
-#bit.ly/1ewxKKv
+#### 3. OPTIONAL. Install eclipse development environment for Linux
 
-#this command will show existing windows
+Use if for some reason you need a browser or other GUI based software 
 
-screen -ls
+##### Install a minimal Gnome desktop
 
-#this connects to the session in multi mode, leaving the instance on the SSH session in the other computer still attached 
-#(sharing the terminal between two or more machines 
-#Work can then be done as if back on the original terminal you began on for the task
+    sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
 
-screen -x atlantis
+##### Install a Virtual Desktop using VNC
+Using instructions from http://www.havetheknowhow.com/Configure-the-server/Install-VNC.html
 
-# to detach screen session from remote machine
-#from within the screen window use the Control-a command mechanism:
-# you should get a [detached from ...atlantis] message
+    sudo apt-get install vnc4server
 
-C-a d
+    vncserver
 
-#to kill the SSH screen process
-screen -S atlantis -X quit
+You'll then be prompted to create and verify a new password
 
-###################################################
+Kill vnc session
 
-# The following is only if you want to install eclipse a development environment for linux
-# or if for some reason you need a browser or other GUI bases software 
+    vncserver -kill :1
 
+Open up the config file
 
-#Install a minimal Gnome desktop
+    vim .vnc/xstartup
 
-sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
+Edit the file as follows
 
-# Install a Virtual Desktop using VNC
-#using instructions from http://www.havetheknowhow.com/Configure-the-server/Install-VNC.html
+> Unmask the unset SESSION_MANAGER line and masked out all the rest. We've then added the last 3 lines.
 
-sudo apt-get install vnc4server
+> !/bin/sh
 
-vncserver
+> Uncomment the following two lines for normal desktop:
 
-#You'll then be prompted to create and verify a new password
+> unset SESSION_MANAGER
 
-# kill vnc session
+> exec /etc/X11/xinit/xinitrc
 
-vncserver -kill :1
+> [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
 
-# open up the config file
+> [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
 
-vim .vnc/xstartup
+> xsetroot -solid grey
 
-#edit the file as follows
-#Unmask the unset SESSION_MANAGER line and masked out all the rest. We've then added the last 3 lines.
+> vncconfig -iconic &
 
-##########################
-#!/bin/sh
+> x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
 
-# Uncomment the following two lines for normal desktop:
-unset SESSION_MANAGER
-# exec /etc/X11/xinit/xinitrc
+> x-window-manager &
 
-#[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
-#[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
-#xsetroot -solid grey
-#vncconfig -iconic &
-#x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
-#x-window-manager &
+> metacity &
 
-metacity &
-gnome-settings-daemon &
-gnome-panel &
+> gnome-settings-daemon &
 
-#########################
+> gnome-panel &
+
