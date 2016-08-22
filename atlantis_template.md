@@ -128,43 +128,7 @@ sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 sudo su - -c "R -e \"install.packages('dplyr', repos='http://cran.rstudio.com/')\""
 ```
 
-## 5. Build Atlantis
-
-##### Check out Atlantis code
-##### Put the username and password at the end
-#
-    svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/branches/bec_dev --username yourusername --password yourpassword 
-
-##### Compile Atlantis
-##### Switch folder 
-#
-    cd bec_dev/atlantis
-##### Build Atlantis code
-#
-
-```sh 
-aclocal
-autoheader
-autoconf
-automake -a
-./configure
-make
-sudo make install
-cd atlantismain
-```
-
-
-If building Atlantis does not work, switch to root user
-```sh
-sudo su -
-```
-and try again
-
-##### check that atlantisNew.exe has been created
-#
-     ls -l
-
-## 6. Clean up server
+## 5. Clean up server
 ##### Cleaning up of partial package
 #
     sudo apt-get autoclean
@@ -177,14 +141,14 @@ and try again
 #
     sudo apt-get autoremove
 
-## 7. Deprovison user
+## 6. Deprovison user
 ###### Required before generalizing machine
 ##### in SSH window
 #
     sudo waagent -deprovision+user
     exit
     
-## 8. Create image template
+## 7. Create image template
 #### Following https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/
 #
 ##### The following steps assume you already have installed Azure Command Line tools (Azure CLI)
