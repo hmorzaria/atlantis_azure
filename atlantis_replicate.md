@@ -131,14 +131,17 @@ chmod +x ~/bin/dropbox.py
 ##### Edit the CRONTAB file to make sure everything updates appropriately by typing the command:
     crontab -e
 
-##### Add these two lines to CRONTAB and exit using ctrl+x then return
+##### Add these lines to CRONTAB and exit using ctrl+x then return
 > @reboot /home/.dropbox-dist/dropboxd
 
 > 1 0-23/1 * * * /home/.dropbox-dist/dropboxd
 
+> @reboot ~/bin/dropbox.py start
 ##### The latter of those two lines tells crontab to run the dropbox daemon on the first minute of every hour... important if the dropbox connection closes as it sometimes does.
 
-##### If necessary to delete dropbox
+#
+##### Use if necessary to delete dropbox
+#
      sudo apt-get remove dropbox; rm -rvf ~/.dropbox ~/.dropbox-dist
     rm -rv ~/Dropbox
 
@@ -150,8 +153,44 @@ chmod +x ~/bin/dropbox.py
 Add the following line
 > R_LIBS_USER='/home/atlantis/R/x86_64-pc-linux-gnu-library/3.3'
 
+### 5. Build Atlantis
 
-### 4. Clean up server
+##### Check out Atlantis code
+##### Put the username and password at the end
+#
+    svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/branches/bec_dev --username yourusername --password yourpassword 
+
+##### Compile Atlantis
+##### Switch folder 
+#
+    cd bec_dev/atlantis
+##### Build Atlantis code
+#
+
+```sh 
+aclocal
+autoheader
+autoconf
+automake -a
+./configure
+make
+sudo make install
+cd atlantismain
+```
+
+
+If building Atlantis does not work, switch to root user
+```sh
+sudo su -
+```
+and try again
+
+##### check that atlantisNew.exe has been created
+#
+     ls -l
+
+
+### 6. Clean up server
 
 ##### Cleaning up of partial package:
 
