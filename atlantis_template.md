@@ -45,43 +45,6 @@ sudo passwd data_user
 #
     sudo ufw show added
 
-## 3. Resize had drive
-##### Power off
-sudo poweroff
-# then deallocate machine
-# use resource manager to set OS disk size
-# Maximum size is 1023 GB
-
-#now restart machine and SSH
-# delete partition
-
-# to change user
-sudo su -
-
-sudo fdisk /dev/sda
-# enter command p will list disk details
-# enter command d to delete partition
-# enter command n 
-# enter command p
-# enter 1 for partition
-# enter for defaulr start and end sectors
-# enter command p
-# enter command w to write
-# will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
-# The kernel still uses the old table. The new table will be used at
-# the next reboot or after you run partprobe(8) or kpartx(8)
-# Syncing disks.
-
-#restart
-sudo reboot
-
-# to change user
-sudo su -
-
-# extend file system
-sudo resize2fs /dev/sda1
-
-
 ## 3. Add and update packages
 ##### Install required packages per Atlantis wiki and utilities
 #
