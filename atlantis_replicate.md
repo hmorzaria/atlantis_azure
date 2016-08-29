@@ -94,13 +94,21 @@ sudo fdisk /dev/sda
 
 ##### Enter the following commands in the prompts
 >> p - list disk details
+
 >> d - delete partition
+
 >> n 
+
 >> p
+
 >> 1 - for partition
+
 >> Enter - default start and end sectors
+
 >> p
+
 >> w - to write
+
 
 Will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy. This is ok. The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8)
 
@@ -110,7 +118,7 @@ sudo reboot
 ##### Change to admin
 sudo su -
 
-##### extend file system
+##### Extend file system
 sudo resize2fs /dev/sda1
 
 
