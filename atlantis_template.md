@@ -8,7 +8,7 @@ This template sets up a base machine that can then be imaged
 * See Set_up_data_science_replicate.txt for how to set up user account (dropbox, google drive)
 
 
-##### USE THIS SCRIPT TO CREATE A TEMPLATE THAT CAN THEN BE REPLICATED TO LAUNCH MULTIPLE VIRTUAL MACHINES. FIRST CREATE THE MACHINE IN THE AZURE PORTAL; THEN STOP VM AND CHANGE THE OS DISK SIZE AND SAVE. THE DISK WILL UPDATE AND RESIZE AUTOMATICALLY, THEN RESTART MACHINE. IF YOU DO ADD A DATA DISK THEN FOLLOW INSTRUCTIONS FOR ATTACHING HD (SEE ADDDISK.MD). IF USING SSD DO NOT NEED TO ADD SWAP
+##### USE THIS SCRIPT TO CREATE A TEMPLATE THAT CAN THEN BE REPLICATED TO LAUNCH MULTIPLE VIRTUAL MACHINES. FIRST CREATE THE MACHINE IN THE AZURE PORTAL. NOTE DS SERIES AND SSD AS STORAGE CANNOT BE USED WITH THESE INSTRUCTIONS, AND IS MORE EXPENSIVE. 
 #
 
 ## 1. Set current time zone and users
@@ -120,12 +120,12 @@ Once installed, RStudio Server will start automatically, and will restart every 
 ##### then exit  CTRL-X
 #
 ##### Obtain r packages
-
+These are some common packages for data analysis, spatial analysis, and Atlantis. Also includes packages to create markdown packages
 ```sh
-sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','plyr','dplyr','tidyr','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','spocc','ridigbio','rvertnet','ecoengine','rbison','rgbif','rebird','readxl','taxize','sperich','cowplot','xtable','gtable','reshape2'), repos = 'http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('RNetCDF','shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','plyr','dplyr','tidyr','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
-sudo su - -c "R -e \"install.packages('dplyr', repos='http://cran.rstudio.com/')\""
+
 ```
 
 ## 5. Clean up server
