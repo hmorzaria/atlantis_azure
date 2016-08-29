@@ -75,6 +75,40 @@ password
 > /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
 
+### 2. Resize hard drive. NOTE: You only need to do this if you expect to use more than the existing nard drive space. You can check available space in disk partitions using the following command:
+    df -h
+##### Power off
+    sudo poweroff
+    
+##### Deallocate machine from portal.azure.com and use resource manager to set OS disk size. Maximum size is 1023 GB
+Now restart machine and SSH
+##### Change to admin
+    sudo su -
+##### Delete partition
+sudo fdisk /dev/sda
+
+##### Enter the following commands in the prompts
+>> p - list disk details
+>> d - delete partition
+>> n 
+>> p
+>> 1 - for partition
+>> Enter - default start and end sectors
+>> p
+>> w - to write
+
+Will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy. This is ok. The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8)
+
+##### Restart
+sudo reboot
+
+##### Change to admin
+sudo su -
+
+##### extend file system
+sudo resize2fs /dev/sda1
+
+
 ### 2. Install Google Drive
 #### Using gdrive https://github.com/prasmussen/gdrive#downloads
 ```sh
