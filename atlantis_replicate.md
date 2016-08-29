@@ -176,28 +176,30 @@ sudo chmod 600 /swapfile
 #####  Add the following line at the end of the file
 >> /swapfile   none    swap    defaults  0   0
 
-#####  close the file (CTRL + x)
+#####  Save and close the file (CTRL + x)
+
+#####  View current swappiness value
+
+    cat /proc/sys/vm/swappiness
+
+#####  Set the swappiness to 10
+
+    sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
+
+>> set vm.swappiness to 10
 
 #####  Configure how much the system will choose to cache inode and dentry information over other data.
+
     cat /proc/sys/vm/vfs_cache_pressure
     sudo sysctl vm.vfs_cache_pressure=50
-#####  View current swappiness value
-    cat /proc/sys/vm/swappiness
-    
-#####  Set the swappiness to 10 and make cache inode and dentry permanent
-    sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
->> Modify the value vm.swappiness to 10
+
+#####  Make permanent the change by adding it to our configuration file.
+    sudo nano /usr/lib/sysctl.d/00-system.conf
+At the bottom, add the line that specifies your new value:
 >> vm.vfs_cache_pressure = 50
+#####  Save and close the file (CTRL + x)
 
-
-
-#####  Make permanent the change by adding it to our configuration file like we did with our swappiness setting:
-sudo nano /usr/lib/sysctl.d/00-system.conf
-#At the bottom, add the line that specifies your new value:
-# Save and close the file 
-
-
-
+#
 ### 3. Install Google Drive
 #### Using gdrive https://github.com/prasmussen/gdrive#downloads
 ```sh
