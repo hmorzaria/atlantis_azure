@@ -75,16 +75,21 @@ password
 > /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
 
-### 2. Resize hard drive. NOTE: You only need to do this if you expect to use more than the existing nard drive space. You can check available space in disk partitions using the following command:
+### 2. Resize hard drive. NOTE: You only need to do this if you expect to use more than the existing hard drive space. Maximum size is 1023 GB. You can check available space in disk partitions using the following command:
     df -h
+The hard drive is partition sda1
+
 ##### Power off
+#
     sudo poweroff
     
-##### Deallocate machine from portal.azure.com and use resource manager to set OS disk size. Maximum size is 1023 GB
+##### Deallocate machine from portal.azure.com and use resource manager to set OS disk size. 
 Now restart machine and SSH
 ##### Change to admin
+#
     sudo su -
 ##### Delete partition
+#
 sudo fdisk /dev/sda
 
 ##### Enter the following commands in the prompts
