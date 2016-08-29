@@ -146,57 +146,54 @@ Switch to root
 #####  Verify that the correct amount of space was reserved
     ls -lh /swapfile
 
-# enable the swapfile
+#####  Enable the swapfile
 
 sudo chmod 600 /swapfile
 
-# Verify that the file has the correct permissions
-# should output ~ -rw------- 1 root root 4.0G Apr 28 17:19 /swapfile
-# with read and write flags enabled.
+#####  Verify that the file has the correct permissions
+#####  should output ~ -rw------- 1 root root 4.0G Apr 28 17:19 /swapfile
+#####  with read and write flags enabled.
 
-ls -lh /swapfile
+    ls -lh /swapfile
 
-# set up space 
+#####  Set up space 
 
-sudo mkswap /swapfile
+    sudo mkswap /swapfile
 
-# enable
+#####  Enable
 
-sudo swapon /swapfile
+    sudo swapon /swapfile
 
-# verify that the procedure was successful by checking whether our system reports swap space now:
+#####  Verify that the procedure was successful by checking whether our system reports swap space now:
 
-sudo swapon -s
-free -m
+    sudo swapon -s
+    free -m
 
-# make the swap file permanent
+#####  Make the swap file permanent
 
-sudo nano /etc/fstab
+    sudo nano /etc/fstab
 
-#add the following line at the end of the file
-/swapfile   none    swap    defaults  0   0
-#close the file
+#####  Add the following line at the end of the file
+>> /swapfile   none    swap    defaults  0   0
 
-# view current swappiness value
+#####  close the file (CTRL + x)
 
-cat /proc/sys/vm/swappiness
+#####  Configure how much the system will choose to cache inode and dentry information over other data.
+    cat /proc/sys/vm/vfs_cache_pressure
+    sudo sysctl vm.vfs_cache_pressure=50
+#####  View current swappiness value
+    cat /proc/sys/vm/swappiness
+    
+#####  Set the swappiness to 10 and make cache inode and dentry permanent
+    sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
+>> Modify the value vm.swappiness to 10
+>> vm.vfs_cache_pressure = 50
 
-# set the swappiness to 10
 
-sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
 
-# set vm.swappiness to 10
-
-# configure how much the system will choose to cache inode and dentry information over other data.
-
-cat /proc/sys/vm/vfs_cache_pressure
-sudo sysctl vm.vfs_cache_pressure=50
-
-# make permanent the change by adding it to our configuration file like we did with our swappiness setting:
-
+#####  Make permanent the change by adding it to our configuration file like we did with our swappiness setting:
 sudo nano /usr/lib/sysctl.d/00-system.conf
 #At the bottom, add the line that specifies your new value:
-vm.vfs_cache_pressure = 50
 # Save and close the file 
 
 
