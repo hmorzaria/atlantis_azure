@@ -4,8 +4,8 @@
 ### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
 
 This template sets up a base machine that can then be imaged
-* See set_up_VM manager.txt for how to image
-* See Set_up_data_science_replicate.txt for how to set up user account (dropbox, google drive)
+* See atlantis_replicate.md to replicate from template
+* See atlantis_server.md for how to set up and manage your server.
 
 
 ##### USE THIS SCRIPT TO CREATE A TEMPLATE THAT CAN THEN BE REPLICATED TO LAUNCH MULTIPLE VIRTUAL MACHINES. FIRST CREATE THE MACHINE IN THE AZURE PORTAL. NOTE DS SERIES AND SSD AS STORAGE CANNOT BE USED WITH THESE INSTRUCTIONS, AND IS MORE EXPENSIVE. 
@@ -44,6 +44,43 @@ sudo passwd data_user
 ##### Review selections
 #
     sudo ufw show added
+
+## 3. Resize had drive
+##### Power off
+sudo poweroff
+# then deallocate machine
+# use resource manager to set OS disk size
+# Maximum size is 1023 GB
+
+#now restart machine and SSH
+# delete partition
+
+# to change user
+sudo su -
+
+sudo fdisk /dev/sda
+# enter command p will list disk details
+# enter command d to delete partition
+# enter command n 
+# enter command p
+# enter 1 for partition
+# enter for defaulr start and end sectors
+# enter command p
+# enter command w to write
+# will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+# The kernel still uses the old table. The new table will be used at
+# the next reboot or after you run partprobe(8) or kpartx(8)
+# Syncing disks.
+
+#restart
+sudo reboot
+
+# to change user
+sudo su -
+
+# extend file system
+sudo resize2fs /dev/sda1
+
 
 ## 3. Add and update packages
 ##### Install required packages per Atlantis wiki and utilities
@@ -120,7 +157,7 @@ Once installed, RStudio Server will start automatically, and will restart every 
 ##### then exit  CTRL-X
 #
 ##### Obtain r packages
-These are some common packages for data analysis, spatial analysis, and Atlantis. Also includes packages to create markdown packages
+These are some common packages for data analysis, spatial analysis, map creation, and Atlantis. Also includes packages to create markdown documents.
 ```sh
 sudo su - -c "R -e \"install.packages(c('RNetCDF','shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','plyr','dplyr','tidyr','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
