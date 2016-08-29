@@ -121,8 +121,87 @@ sudo su -
 ##### Extend file system
 sudo resize2fs /dev/sda1
 
+#### OPTIONAL 
+#### Add Swap space
+##### Swap is an area on a hard drive that has been designated as a place where the operating system can temporarily store data that it can no longer hold in RAM. Useful if you expect your application to use a lot of RAM
 
-### 2. Install Google Drive
+##### Check for configured swap
+
+    sudo swapon -s
+    free -m
+
+##### Check available space on the Hard Drive partition
+    df -h
+
+#####  Create a 8 Gigabyte swapfile
+
+Switch to root
+
+    sudo su -
+
+#####  Here substitute count being equal to the desired block size.
+
+    dd if=/dev/zero of=swapfile count=8192000 bs=1024
+
+#####  Verify that the correct amount of space was reserved
+    ls -lh /swapfile
+
+# enable the swapfile
+
+sudo chmod 600 /swapfile
+
+# Verify that the file has the correct permissions
+# should output ~ -rw------- 1 root root 4.0G Apr 28 17:19 /swapfile
+# with read and write flags enabled.
+
+ls -lh /swapfile
+
+# set up space 
+
+sudo mkswap /swapfile
+
+# enable
+
+sudo swapon /swapfile
+
+# verify that the procedure was successful by checking whether our system reports swap space now:
+
+sudo swapon -s
+free -m
+
+# make the swap file permanent
+
+sudo nano /etc/fstab
+
+#add the following line at the end of the file
+/swapfile   none    swap    defaults  0   0
+#close the file
+
+# view current swappiness value
+
+cat /proc/sys/vm/swappiness
+
+# set the swappiness to 10
+
+sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
+
+# set vm.swappiness to 10
+
+# configure how much the system will choose to cache inode and dentry information over other data.
+
+cat /proc/sys/vm/vfs_cache_pressure
+sudo sysctl vm.vfs_cache_pressure=50
+
+# make permanent the change by adding it to our configuration file like we did with our swappiness setting:
+
+sudo nano /usr/lib/sysctl.d/00-system.conf
+#At the bottom, add the line that specifies your new value:
+vm.vfs_cache_pressure = 50
+# Save and close the file 
+
+
+
+### 3. Install Google Drive
 #### Using gdrive https://github.com/prasmussen/gdrive#downloads
 ```sh
 sudo apt-get update
@@ -136,7 +215,7 @@ gdrive about
 ##### gdrive sync upload test.txt
 ##### see further instructions in http://linuxnewbieguide.org/?p=1078
 
-### 3.  Install dropbox
+### 4.  Install dropbox
 
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
     ~/.dropbox-dist/dropboxd
@@ -193,14 +272,14 @@ chmod +x ~/bin/dropbox.py
     rm -rv ~/Dropbox
 
 
-### 4. Assign R library path
+### 5. Assign R library path
 
      sudo nano ~/.profile
 
 Add the following line
 > R_LIBS_USER='/home/atlantis/R/x86_64-pc-linux-gnu-library/3.3'
 
-### 5. Build Atlantis
+### 6. Build Atlantis
 
 ##### Check out Atlantis code
 ##### Put the username and password at the end
@@ -237,7 +316,7 @@ and try again
      ls -l
 
 
-### 6. Clean up server
+### 7. Clean up server
 
 ##### Cleaning up of partial package:
 
