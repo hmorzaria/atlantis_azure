@@ -100,6 +100,27 @@ sudo gdebi rstudio-server-0.99.902-amd64.deb
 You can now access your RStudio server at http://your-instance-ip:8787
 
 > i.e. 192.241.209.245:8787
+
+##### NOTE: When creating a VM through the Azure online portal you can select to create a Network Security group. If you do, adding permissions for TCP port 8787 from the server will not work. You have to add the permission from the portal as follows:
+#
+
+> Select a VM from the virtual machines list.
+
+> Under settings, select Network interfaces.
+
+> Click on the network name on the next panel.
+
+> Select Network security group in the set of descriptors.
+
+> Click on the Network security name group.
+
+> Select inbound security rules, in the next panel click add and then enter
+info to create a new rule. 
+
+> Enter Name: rstudio,  Protocol: TCP, Port range: 8787. 
+
+> Leave other fields with their default. Click ok.
+
 ##### To start and stop the server
 #
 ```sh 
