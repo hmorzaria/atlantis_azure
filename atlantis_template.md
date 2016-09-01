@@ -54,16 +54,13 @@ sudo passwd data_user
     sudo apt-get dist-upgrade
 
     sudo apt-get install subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev
-    sudo apt-get install curl gdebi-core r-base libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate
+    sudo apt-get install curl gdebi-core r-base libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin
 
 wget https://launchpad.net/ubuntu/+archive/primary/+files/libproj9_4.9.1-2_amd64.deb
 sudo dpkg -i libproj9_4.9.1-2_amd64.deb
 
 wget https://launchpad.net/ubuntu/+archive/primary/+files/libproj-dev_4.9.1-2_amd64.deb
 sudo dpkg -i libproj-dev_4.9.1-2_amd64.deb
-
-wget http://launchpadlibrarian.net/171885381/gdal-bin_1.10.1+dfsg-5ubuntu1_amd64.deb
-sudo dpkg -i gdal-bin_1.10.1+dfsg-5ubuntu1_amd64.deb
 
 wget http://mirrors.kernel.org/ubuntu/pool/universe/g/gdal/libgdal-dev_1.10.1+dfsg-5ubuntu1_amd64.deb
 sudo dpkg -i libgdal-dev_1.10.1+dfsg-5ubuntu1_amd64.deb
@@ -143,7 +140,7 @@ Once installed, RStudio Server will start automatically, and will restart every 
 ##### Obtain r packages
 These are some common packages for data analysis, spatial analysis, map creation, and Atlantis. Also includes packages to create markdown documents.
 ```sh
-sudo su - -c "R -e \"install.packages(c('RNetCDF','shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','plyr','dplyr','tidyr','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2'), repos = 'http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','plyr','dplyr','tidyr','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 
