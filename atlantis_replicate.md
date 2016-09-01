@@ -21,6 +21,9 @@ Log into the Azure account
     azure config mode arm
 
 ### 1. Create new VMs from template
+##### ***PLEASE FOLLOW THE USE OF SINGLE QUOTATION MARKS IN THE EXAMPLES***
+#
+#
 ##### New VMs should be in same resource group as the image template and in same region
 ##### Also always use the same virtual network and default subnet
 Regions are centralus, westus, eastus
@@ -48,11 +51,11 @@ Regions are centralus, westus, eastus
 #
 > data:  Id  : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
-##### D. Copy the image json file and edit the new version
+##### D. Copy the image json file and edit the NEW version
 ###### Increase the last digit in the uri for the vhd, after entering the editor, scroll rigth, until you find a string that starts with URI, then change the last digit before the extension.
 #
     cp myimage.json newmyimage.json
-    sudo nano myimage.json
+    sudo nano newmyimage.json
 ###### To exit the editor CTRL+X
 #
 ##### E. Create new deployment
