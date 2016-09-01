@@ -47,12 +47,24 @@ Regions are centralus, westus, eastus
 
 > for example: azure network nic create 'DataScience' 'datanic4' -k 'default' -m 'DataScience' -p datamodelrep4 -l "westus"
 ##### C. From the output copy the nic ID
-##### Scroll up, to the field ID, it will be a string similar to this. Copy starting in '/subscriptions'
-#
+
+> Scroll up to the nic ID
+> Copy starting in '/subscriptions'
+> ###### MAKE SURE YOU ARE COPYING THE RIGHT LINE!
+It should look like this (Note the networkInterfaces/
 > data:  Id  : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
 ##### D. Copy the image json file and edit the NEW version
-###### Increase the last digit in the uri for the vhd, after entering the editor, scroll rigth, until you find a string that starts with URI, then change the last digit before the extension.
+###### Increase the last digit in the uri for the vhd
+
+> Enter the editor
+
+> Scroll down or rigth until you find a string that starts "vhd": {     "uri"
+> Example:
+> https://datamodelrep3.blob.core.windows.net/vmcontainer9d9ea85c-dd89-4458-a4e1-d6b2c3c2bee1/osDisk.5d4ea85c-dd65-4458-a4e9-d6b8c3c2bee2.vhd
+
+> Change the last digit before the extension .vhd
+
 #
     cp myimage.json newmyimage.json
     sudo nano newmyimage.json
@@ -75,6 +87,8 @@ myuser
 password
 ###### NetworkID
 ###### Put here the nic ID
+> Tne networkInterfaceID will look like:
+
 > /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-new-resource-group-name>/providers/Microsoft.Network/networkInterfaces/<your-nic-name>
 
 
