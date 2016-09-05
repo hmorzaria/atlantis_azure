@@ -72,7 +72,7 @@ sudo apt-get -y install r-base
 ###### https://www.rstudio.com/products/rstudio/download-server/# 
 
 ```sh
-sudo apt-get install gdebi-core
+sudo apt-get install -y gdebi-core
 wget https://download2.rstudio.org/rstudio-server-0.99.903-amd64.deb
 sudo gdebi rstudio-server-0.99.903-amd64.deb
 ```
@@ -139,15 +139,11 @@ Check Phyton version and pip is installed
     python --version
     pip --version
 
-Install Ipython and Jupyter notebook
-
-    sudo apt-get -y install ipython ipython-notebook
-    sudo -H pip install jupyter
-    
-If you get an error that pip is an old version, upgrade and try installing again
+Upgrade PIP and install Jupyter 
 
     sudo -H pip install --upgrade pip
     sudo -H pip install jupyter
+
 
 To connect to Jupyter notebook use SSH (PuTTY on Windows). Specify Tunlocalhost:8888nels. Enter the IP of the VM and specify Tunnels using port 8000 or greater. Forwarded port should be 'localhost:8888'. 
 Image screens for PuTTY set up are here 
