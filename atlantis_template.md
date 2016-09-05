@@ -41,35 +41,20 @@ sudo passwd data_user
 
 ## 3. Add and update packages
 ##### Install required packages per Atlantis wiki and utilities
+### Install missing dependencies
+### Set as silent installs, so you can copy all lines at a time into the terminal
 #
-
 ```sh
     sudo apt-get update 
     sudo apt-get dist-upgrade
 
-    sudo apt-get install subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev
-```
-Continue package installation
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core r-base
+
+    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev
  
- ```sh
-    sudo apt-get install curl gdebi-core r-base libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin
-
-wget https://launchpad.net/ubuntu/+archive/primary/+files/libproj9_4.9.1-2_amd64.deb
-sudo dpkg -i libproj9_4.9.1-2_amd64.deb
-
-wget https://launchpad.net/ubuntu/+archive/primary/+files/libproj-dev_4.9.1-2_amd64.deb
-sudo dpkg -i libproj-dev_4.9.1-2_amd64.deb
-
-wget http://mirrors.kernel.org/ubuntu/pool/universe/g/gdal/libgdal-dev_1.10.1+dfsg-5ubuntu1_amd64.deb
-sudo dpkg -i libgdal-dev_1.10.1+dfsg-5ubuntu1_amd64.deb
-
-wget http://mirrors.kernel.org/ubuntu/pool/universe/libg/libgeo-proj4-perl/libgeo-proj4-perl_1.05-1_amd64.deb
-sudo dpkg -i libgeo-proj4-perl_1.05-1_amd64.deb
-
+  sudo apt-get -f install -y
+  
 ```
-
-### Install missing dependencies
-    sudo apt-get -f install
 
 ## 4. Install R and R Studio Server
 
@@ -149,10 +134,8 @@ sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 ## 5. [OPTIONAL] Install Jupyter notebook
 Jupyter Notebook offers an interactive web interface to many languages, including IPython and R.    
     
-    sudo apt-get update
-    sudo apt-get -y install python2.7 python-pip python-dev
-    
 Check Phyton version and pip is installed
+
     python --version
     pip --version
 
