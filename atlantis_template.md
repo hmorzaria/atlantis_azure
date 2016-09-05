@@ -36,13 +36,7 @@ sudo passwd data_user
 
     sudo ufw allow ssh
     sudo ufw allow 8787/tcp
-
-##### Enable firewall
-#
     sudo ufw enable
-
-##### Review selections
-#
     sudo ufw show added
 
 ## 3. Add and update packages
