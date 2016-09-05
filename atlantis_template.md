@@ -73,15 +73,7 @@ sudo dpkg -i libgeo-proj4-perl_1.05-1_amd64.deb
 ### Install missing dependencies
     sudo apt-get -f install
 
-## 4. [OPTIONAL] Install Microsoft R Open
-
-```sh
-wget https://mran.microsoft.com/install/mro/3.3.1/microsoft-r-open-3.3.1.tar.gz
-cd microsoft-r-open/
-```
-
-
-## 5. Install R and R Studio Server
+## 4. Install R and R Studio Server
 
 ##### Update repository so that we get the latest R
 #
@@ -156,7 +148,7 @@ sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 
 ```
-## 6. [OPTIONAL] Install Jupyter notebook
+## 5. [OPTIONAL] Install Jupyter notebook
 Jupyter Notebook offers an interactive web interface to many languages, including IPython and R.    
     
     sudo apt-get update
@@ -194,14 +186,14 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-noteboo
 #
     sudo apt-get autoremove
 
-## 7. Deprovison user
+## 6. Deprovison user
 ###### Required before generalizing machine
 ##### in SSH window
 #
     sudo waagent -deprovision+user
     exit
     
-## 8. Create image template
+## 7. Create image template
 #### Following https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/
 #
 ##### The following steps assume you already have installed Azure Command Line tools (Azure CLI)
