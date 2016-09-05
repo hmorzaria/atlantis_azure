@@ -304,7 +304,8 @@ chmod +x ~/bin/dropbox.py
 #
 ##### Use if necessary to delete dropbox
 #
-     sudo apt-get remove dropbox; rm -rvf ~/.dropbox ~/.dropbox-dist
+
+    sudo apt-get remove dropbox; rm -rvf ~/.dropbox ~/.dropbox-dist
     rm -rv ~/Dropbox
 
 
@@ -312,8 +313,8 @@ chmod +x ~/bin/dropbox.py
 
      sudo nano ~/.profile
 
-Add the following line
-> R_LIBS_USER='/home/atlantis/R/x86_64-pc-linux-gnu-library/3.3'
+Add the following line. Check if R version is correct
+> R_LIBS_USER='/home/atlantis/R/x86_64-pc-linux-gnu-library/3.3.1'
 
 ### 6. Build Atlantis
 
