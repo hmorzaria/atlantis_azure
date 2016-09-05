@@ -14,7 +14,8 @@ Screen sessions are persistent SSH session that can be checked from multiple com
 These commands leave the instance on the SSH session in the other computer still attached 
 You can then log in and work can then be done as if back on the original terminal you began on for the task
 
-screen -S session_name
+    screen -S session_name
+    
 > for example screen -S atlantis_session
 
 The following commands are useful to manage screens
