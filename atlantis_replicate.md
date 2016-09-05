@@ -46,7 +46,12 @@ Regions are centralus, westus, eastus
      azure network nic create <your-new-resource-group-name> <your-nic-name> -k <your-subnetname> -m <your-vnet-name> -p <your-ip-name> -l "region"
 
 > for example: azure network nic create 'DataScience' 'datanic4' -k 'default' -m 'DataScience' -p datamodelrep4 -l "westus"
+
+Show the NIC ID
+
 ##### C. From the output copy the nic ID
+
+    azure network nic show <your-new-resource-group-name> <your-nic-name>
 
 > Scroll up to the nic ID
 > Copy starting in '/subscriptions'
@@ -66,15 +71,19 @@ It should look like this (Note the networkInterfaces/
 > Change the last digit before the extension .vhd
 
 #
+
     cp myimage.json newmyimage.json
     sudo nano newmyimage.json
+    
 ###### To exit the editor CTRL+X
 #
 ##### E. Create new deployment
 #
+Use the new json file you edited previously
+
      azure group deployment create <your-new-resource-group-name> <your-new-deployment-name> -f <your-template-file-name.json>
 
-> for example: azure group deployment create 'DataScience' 'deployanalysistemplate3' -f myimage.json
+> for example: azure group deployment create 'DataScience' 'deployanalysistemplate3' -f mynewimage.json
 ##### The json file is the one you created when imaging your machine
 #
 ##### F. Fill in requested fields
@@ -93,21 +102,26 @@ password
 
 
 ### 2. Resize hard drive. NOTE: You only need to do this if you expect to use more than the existing hard drive space. Maximum size is 1023 GB. You can check available space in disk partitions using the following command:
+   
     df -h
+
 The hard drive is partition sda1
 
 ##### Power off
 #
+
     sudo poweroff
     
 ##### Deallocate machine from portal.azure.com and use resource manager to set OS disk size. 
 Now restart machine and SSH
 ##### Change to admin
 #
+
     sudo su -
 ##### Delete partition
 #
-sudo fdisk /dev/sda
+
+    sudo fdisk /dev/sda
 
 ##### Enter the following commands in the prompts
 >> p - list disk details
@@ -130,13 +144,16 @@ sudo fdisk /dev/sda
 Will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy. This is ok. The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8)
 
 ##### Restart
-sudo reboot
+
+    sudo reboot
 
 ##### Change to admin
-sudo su -
+
+    sudo su -
 
 ##### Extend file system
-sudo resize2fs /dev/sda1
+
+    sudo resize2fs /dev/sda1
 
 #### OPTIONAL 
 #### Add Swap space
@@ -148,6 +165,7 @@ sudo resize2fs /dev/sda1
     free -m
 
 ##### Check available space on the Hard Drive partition
+    
     df -h
 
 #####  Create a 8 Gigabyte swapfile
@@ -161,11 +179,12 @@ Switch to root
     dd if=/dev/zero of=swapfile count=8192000 bs=1024
 
 #####  Verify that the correct amount of space was reserved
+#
     ls -lh /swapfile
 
 #####  Enable the swapfile
 
-sudo chmod 600 /swapfile
+    sudo chmod 600 /swapfile
 
 #####  Verify that the file has the correct permissions
 #####  should output ~ -rw------- 1 root root 4.0G Apr 28 17:19 /swapfile
@@ -271,7 +290,8 @@ chmod +x ~/bin/dropbox.py
 ~/bin/dropbox.py exclude list
 ```
 ##### Edit the CRONTAB file to make sure everything updates appropriately by typing the command:
-    crontab -e
+
+    sudo nano crontab -e
 
 ##### Add these lines to CRONTAB and exit using ctrl+x then return
 > @reboot /home/.dropbox-dist/dropboxd
