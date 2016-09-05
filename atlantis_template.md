@@ -90,8 +90,8 @@ sudo apt-get -y install r-base
 
 ```sh
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/rstudio-server-0.99.902-amd64.deb
-sudo gdebi rstudio-server-0.99.902-amd64.deb
+wget https://download2.rstudio.org/rstudio-server-0.99.903-amd64.deb
+sudo gdebi rstudio-server-0.99.903-amd64.deb
 ```
 
 You can now access your RStudio server at http://your-instance-ip:8787
