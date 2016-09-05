@@ -73,7 +73,7 @@ sudo dpkg -i libgeo-proj4-perl_1.05-1_amd64.deb
 ### Install missing dependencies
     sudo apt-get -f install
 
-## 4. Install R Studio Server
+## 4. Install R and R Studio Server
 
 ##### Update repository so that we get the latest R
 #
@@ -145,8 +145,32 @@ sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 
 ```
+## 5. [OPTIONAL] Install Jupyter notebook
+Jupyter Notebook offers an interactive web interface to many languages, including IPython and R.    
+    
+    sudo apt-get update
+    sudo apt-get -y install python2.7 python-pip python-dev
+    
+Check Phyton version and pip is installed
+    python --version
+    pip --version
 
-## 5. Clean up server
+Install Ipython and Jupyter notebook
+
+    sudo apt-get -y install ipython ipython-notebook
+    sudo -H pip install jupyter
+    
+If you get an error that pip is an old version, upgrade and try installing again
+
+    sudo -H pip install --upgrade pip
+    sudo -H pip install jupyter
+
+To connect to Jupyter notebook use SSH (PuTTY on Windows). Specify Tunlocalhost:8888nels. Enter the IP of the VM and specify Tunnels using port 8000 or greater. Forwarded port should be 'localhost:8888'. 
+Image screens for PuTTY set up are here 
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-notebook-to-run-ipython-on-ubuntu-16-04
+
+
+## 6. Clean up server
 ##### Cleaning up of partial package
 #
     sudo apt-get autoclean
