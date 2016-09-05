@@ -168,6 +168,9 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-noteboo
 ##### in SSH window
 #
     sudo waagent -deprovision+user
+    
+Then exit the VM
+
     exit
     
 ## 7. Create image template
