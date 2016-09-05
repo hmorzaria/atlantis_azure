@@ -291,7 +291,9 @@ chmod +x ~/bin/dropbox.py
 ```
 ##### Edit the CRONTAB file to make sure everything updates appropriately by typing the command:
 
-    sudo nano crontab -e
+   crontab -e
+
+If prompted choose nano as editor
 
 ##### Add these lines to CRONTAB and exit using ctrl+x then return
 > @reboot /home/.dropbox-dist/dropboxd
