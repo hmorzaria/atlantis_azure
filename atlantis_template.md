@@ -48,6 +48,10 @@ sudo passwd data_user
     sudo apt-get dist-upgrade
 
     sudo apt-get install subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev
+```
+Continue package installation
+ 
+ ```sh
     sudo apt-get install curl gdebi-core r-base libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin
 
 wget https://launchpad.net/ubuntu/+archive/primary/+files/libproj9_4.9.1-2_amd64.deb
