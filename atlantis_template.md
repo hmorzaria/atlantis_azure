@@ -68,7 +68,7 @@ sudo apt-get update
 sudo apt-get -y install r-base
 ```
 ##### Download the latest package from the RStudio website and install it with gdebi.
-##### Note all VM instances are 64 bit, so youbll need the 64 bit package.
+##### Note all VM instances are 64 bit, so you'll need the 64 bit package.
 ###### https://www.rstudio.com/products/rstudio/download-server/# 
 
 ```sh
