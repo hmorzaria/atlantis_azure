@@ -74,7 +74,7 @@ sudo apt-get -y install r-base
 ```sh
 sudo apt-get install gdebi-core
 wget https://download2.rstudio.org/rstudio-server-1.0.44-amd64.deb
-sudo gdebi rstudio-server-1.0.44-amd64.deb
+sudo -y gdebi rstudio-server-1.0.44-amd64.deb
 ```
 Verify installation
     
@@ -126,7 +126,7 @@ Once installed, RStudio Server will start automatically, and will restart every 
 ##### Obtain r packages
 These are some common packages for data analysis, spatial analysis, map creation, and Atlantis. Also includes packages to create markdown documents.
 ```sh
-sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF'), repos = 'http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF','doSNOW','parallel'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
