@@ -50,9 +50,9 @@ sudo passwd data_user
 
     sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core r-base
 
-    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev
+    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev
  
-  sudo apt-get -f install -y
+  sudo apt-get -f install -y 
   
 ```
 
@@ -72,9 +72,9 @@ sudo apt-get -y install r-base
 ###### https://www.rstudio.com/products/rstudio/download-server/# 
 
 ```sh
-sudo apt-get install -y gdebi-core
-wget https://download2.rstudio.org/rstudio-server-0.99.903-amd64.deb
-sudo gdebi rstudio-server-0.99.903-amd64.deb
+sudo apt-get install gdebi-core
+wget https://download2.rstudio.org/rstudio-server-1.0.44-amd64.deb
+sudo gdebi rstudio-server-1.0.44-amd64.deb
 ```
 Verify installation
     
@@ -128,6 +128,7 @@ These are some common packages for data analysis, spatial analysis, map creation
 ```sh
 sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
 
 ```
