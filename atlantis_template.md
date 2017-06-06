@@ -1,4 +1,4 @@
-# Configuration Ubuntu Server 16.04 LTS
+# Current Configuration Ubuntu Server 17.04 (Zesty Zapus)
 ## Running as a Virtual machine instance in Azure set up to run Atlantis Ecosystem Model
 
 ### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
@@ -10,6 +10,10 @@ This template sets up a base machine that can then be imaged
 
 ##### USE THIS SCRIPT TO CREATE A TEMPLATE THAT CAN THEN BE REPLICATED TO LAUNCH MULTIPLE VIRTUAL MACHINES. FIRST CREATE THE MACHINE IN THE AZURE PORTAL. NOTE DS SERIES AND SSD AS STORAGE CANNOT BE USED WITH THESE INSTRUCTIONS, AND IS MORE EXPENSIVE. 
 #
+This code assumes you are running Ubuntu Server 17.04
+Check the version of your OS
+
+     lsb_release -a
 
 ## 1. Set current time zone and users
 ##### Time zone
@@ -23,45 +27,37 @@ Will need input for password
 sudo adduser data_user
 sudo passwd data_user 
 ```
-##### Give root privileges
+###### Give root privileges
 #
      sudo usermod data_user -G sudo
 
-##### To change user
+###### To change user
 #   
     sudo su - data_user
 
-
-## 2. Add firewall
-
-    sudo ufw allow ssh
-    sudo ufw allow 8787/tcp
-    sudo ufw enable
-    sudo ufw show added
-
-## 3. Add and update packages
-##### Install required packages per Atlantis wiki and utilities
-### Install missing dependencies
-### Set as silent installs, so you can copy all lines at a time into the terminal
+## 2. Add and update packages
+#### Install required packages per Atlantis wiki and utilities
+##### Set as silent installs, so you can copy all lines at a time into the terminal
 #
 ```sh
-    sudo apt-get update 
-    sudo apt-get dist-upgrade
+    sudo apt-get update -y
+    sudo apt-get dist-upgrade -y
 
-    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core r-base
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core libssl-dev openssl
 
-    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev
- 
-  sudo apt-get -f install -y 
-  
-```
+    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop
+ ```
+
+##### Install missing dependencies and unused packages
+        sudo apt-get -f install -y 
+        sudo apt autoremove -y
 
 ## 4. Install R and R Studio Server
 
 ##### Update repository so that we get the latest R
 #
 ```sh
-sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu zesty/" >> /etc/apt/sources.list'
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
@@ -73,8 +69,8 @@ sudo apt-get -y install r-base
 
 ```sh
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.0.44-amd64.deb
-sudo -y gdebi rstudio-server-1.0.44-amd64.deb
+wget https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
+sudo gdebi --n rstudio-server-1.0.143-amd64.deb
 ```
 Verify installation
     
@@ -124,9 +120,11 @@ Once installed, RStudio Server will start automatically, and will restart every 
 ##### then exit  CTRL-X
 #
 ##### Obtain r packages
+Install R packages to common library. These 
 These are some common packages for data analysis, spatial analysis, map creation, and Atlantis. Also includes packages to create markdown documents.
 ```sh
-sudo su - -c "R -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','graphics','tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF','doSNOW','parallel'), repos = 'http://cran.rstudio.com/')\""
+
+sudo su - -c "R --vainilla -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','httr','rvest', 'tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF','doSNOW','stringr'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
