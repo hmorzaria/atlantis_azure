@@ -1,4 +1,4 @@
-# Current Configuration Ubuntu Server 17.04 (Zesty Zapus)
+# Current Configuration Ubuntu Server 16.04 (Xenial)
 ## Running as a Virtual machine instance in Azure set up to run Atlantis Ecosystem Model
 
 ### NOTE every time you start or stop the machine the IP address will change; choose a static IP if you want to change this behavior
@@ -17,9 +17,12 @@ Check the version of your OS
 
 ## 1. Set current time zone and users
 ##### Time zone
-Follow command prompts after entering
 #
-    sudo dpkg-reconfigure tzdata
+    sudo timedatectl set-timezone America/Los_Angeles
+Use to list all possible zones
+    
+    timedatectl list-timezones
+
 
 ##### Add new user (optional)
 Will need input for password
@@ -45,8 +48,9 @@ sudo passwd data_user
 
     sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core libssl-dev openssl
 
-    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop
- ```
+    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop
+    
+```
 
 ##### Install missing dependencies and unused packages
         sudo apt-get -f install -y 
@@ -57,7 +61,7 @@ sudo passwd data_user
 ##### Update repository so that we get the latest R
 #
 ```sh
-sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu zesty/" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list'
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
