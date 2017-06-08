@@ -241,15 +241,17 @@ and try again
 
 #### Download and install AzCopy
 Allows upload of data to a blob storage account.
-Install .NET core first
+Install .Net Core first
 ```sh
-sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list' 
+sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list' 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
-sudo apt-get update
-sudo apt-get install dotnet-dev-1.0.3
 ```
 ```sh
-wget -O azcopy.tar.gz https://aka.ms/downloadazcopyprlinux
-tar -xf azcopy.tar.gz
-sudo ./install.sh
+curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > ./microsoft-prod.list
+sudo cp ./microsoft-prod.list /etc/apt/sources.list.d/
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
+
+sudo apt-get update
+sudo apt-get install azcopy
 ```
