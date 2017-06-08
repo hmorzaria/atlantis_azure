@@ -239,138 +239,17 @@ and try again
 
     sudo apt-get autoremove
 
-
-## OPTIONAL SETTINGS
-### Resize hard drive. NOTE: You only need to do this if you expect to use more than the existing hard drive space. Maximum size is 1023 GB. You can check available space in disk partitions using the following command:
-   
-    df -h
-
-The hard drive is partition sda1
-
-##### Power off
-#
-
-    sudo poweroff
-    
-##### Deallocate machine from portal.azure.com and use resource manager to set OS disk size. 
-Now restart machine and SSH
-##### Change to admin
-#
-
-    sudo su -
-##### Delete partition
-#
-
-    sudo fdisk /dev/sda
-
-##### Enter the following commands in the prompts
->> p - list disk details
-
->> d - delete partition
-
->> n 
-
->> p
-
->> 1 - for partition
-
->> Enter - default start and end sectors
-
->> p
-
->> w - to write
-
-
-Will return a warning WARNING: Re-reading the partition table failed with error 16: Device or resource busy. This is ok. The kernel still uses the old table. The new table will be used at the next reboot or after you run partprobe(8) or kpartx(8)
-
-##### Restart
-
-    sudo reboot
-
-##### Change to admin
-
-    sudo su -
-
-##### Extend file system
-
-    sudo resize2fs /dev/sda1
-
-#### OPTIONAL 
-#### Add Swap space
-##### Swap is an area on a hard drive that has been designated as a place where the operating system can temporarily store data that it can no longer hold in RAM. Useful if you expect your application to use a lot of RAM
-
-##### Check for configured swap
-
-    sudo swapon -s
-    free -m
-
-##### Check available space on the Hard Drive partition
-    
-    df -h
-
-#####  Create a 8 Gigabyte swapfile
-
-Switch to root
-
-    sudo su -
-
-#####  Here substitute count being equal to the desired block size.
-
-    dd if=/dev/zero of=swapfile count=8192000 bs=1024
-
-#####  Verify that the correct amount of space was reserved
-#
-    ls -lh /swapfile
-
-#####  Enable the swapfile
-
-    sudo chmod 600 /swapfile
-
-#####  Verify that the file has the correct permissions
-#####  should output ~ -rw------- 1 root root 4.0G Apr 28 17:19 /swapfile
-#####  with read and write flags enabled.
-
-    ls -lh /swapfile
-
-#####  Set up space 
-
-    sudo mkswap /swapfile
-
-#####  Enable
-
-    sudo swapon /swapfile
-
-#####  Verify that the procedure was successful by checking whether our system reports swap space now:
-
-    sudo swapon -s
-    free -m
-
-#####  Make the swap file permanent
-
-    sudo nano /etc/fstab
-
-#####  Add the following line at the end of the file
->> /swapfile   none    swap    defaults  0   0
-
-#####  Save and close the file (CTRL + x)
-
-#####  View current swappiness value
-
-    cat /proc/sys/vm/swappiness
-
-#####  Set the swappiness to 10
-
-    sudo nano /usr/lib/tuned/virtual-guest/tuned.conf
-
->> set vm.swappiness to 10
-
-#####  Configure how much the system will choose to cache inode and dentry information over other data.
-
-    cat /proc/sys/vm/vfs_cache_pressure
-    sudo sysctl vm.vfs_cache_pressure=50
-
-#####  Make permanent the change by adding it to our configuration file.
-    sudo nano /usr/lib/sysctl.d/00-system.conf
-At the bottom, add the line that specifies your new value:
->> vm.vfs_cache_pressure = 50
-#####  Save and close the file (CTRL + x)
+#### Download and install AzCopy
+Allows upload of data to a blob storage account.
+Install .NET core first
+```sh
+sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list' 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+sudo apt-get update
+sudo apt-get install dotnet-dev-1.0.3
+```
+```sh
+wget -O azcopy.tar.gz https://aka.ms/downloadazcopyprlinux
+tar -xf azcopy.tar.gz
+sudo ./install.sh
+```
