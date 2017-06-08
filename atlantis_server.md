@@ -1,6 +1,49 @@
-# Manage your Atlantis server
+# Current Configuration Ubuntu Server 16.04 (Xenial)
+# This script details how to create a Virtual machine (instance) directly in the resource panel (Azure Portal)
+# For use in Atlantis simulations
+# Not using templates
+ NOTE DS SERIES AND SSD AS STORAGE CANNOT BE USED WITH THESE INSTRUCTIONS, AND IS MORE EXPENSIVE. 
+#
+This code assumes you are running Ubuntu Server 17.04
+Check the version of your OS
 
-### Code to operate your server and deploy Atlantis runs
+     lsb_release -a
+
+## 1. Set current time zone and users
+##### Time zone
+#
+    sudo timedatectl set-timezone America/Los_Angeles
+
+To list all possible zones
+    
+    timedatectl list-timezones
+
+
+##### Add new user (optional)
+Will need input for password
+``` sh
+sudo adduser data_user
+sudo passwd data_user 
+sudo usermod data_user -G sudo # gives root privileges
+sudo su - data_user # change user
+```
+
+## 2. Add and update packages
+#### Install required packages per Atlantis wiki and utilities
+##### Silent installs, copy in blocks
+#
+```sh
+    sudo apt-get update -y
+    sudo apt-get dist-upgrade -y
+
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core libssl-dev openssl
+
+    sudo apt-get install -y libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop
+    sudo apt-get -f install -y # missing dependencies
+    sudo apt autoremove -y #unused packages
+        
+
+
 
 #### 1. Update your server
 It is good practice to periodically update system files
