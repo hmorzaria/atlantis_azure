@@ -124,9 +124,9 @@ These are some common packages for data analysis, spatial analysis, map creation
 ```sh
 
 sudo su - -c "R --vainilla -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','httr','rvest', 'tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF','readr', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF','doSNOW','stringr','stringi','parallel','future'), repos = 'http://cran.rstudio.com/')\""
-sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
-sudo su - -c "R -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
-sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
+sudo su - -c "R --vainilla -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R --vainilla -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R --vainilla -e \"devtools::install_github('alketh/atlantistools')\""
 
 ```
 ## 5. [OPTIONAL] Install Jupyter notebook
@@ -147,8 +147,22 @@ To connect to Jupyter notebook use SSH (PuTTY on Windows). Specify Tunlocalhost:
 Image screens for PuTTY set up are here 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-notebook-to-run-ipython-on-ubuntu-16-04
 
+## 6.Install AzCopy
+Allows upload of data to a blob storage account.
+Install .Net Core first
+```sh
+sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list' 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > ./microsoft-prod.list
+sudo cp ./microsoft-prod.list /etc/apt/sources.list.d/
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
 
-## 6. Clean up server
+sudo apt-get update
+sudo apt-get install -y azcopy
+```
+
+## 7. Clean up server
 ##### Cleaning up of partial package
 #
     sudo apt-get autoclean
