@@ -10,6 +10,7 @@ The Azure CLI is available from https://azure.microsoft.com/en-us/documentation/
 Install Node.js first available from https://nodejs.org/en/download/package-manager/
 
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    
     sudo apt-get install -y nodejs
     sudo npm install azure-cli -g
 Log into the Azure account
@@ -111,6 +112,7 @@ Specify user password
 ```sh
 sudo apt-get update
 sudo wget -O gdrive https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
+
 sudo chmod +x gdrive
 sudo cp gdrive /usr/local/bin
 gdrive about 
