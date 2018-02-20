@@ -36,7 +36,7 @@ sudo su - data_user # change user
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
 
-    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi nautilus-dropbox libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj9 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop libprotobuf-dev protobuf-compiler
     
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
@@ -44,6 +44,9 @@ sudo su - data_user # change user
     sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
     sudo apt install gdal-bin python-gdal python3-gdal
     
+    sudo add-apt-repository -y ppa:opencpu/jq
+    sudo apt-get update
+    sudo apt-get install libjq-dev -y
     
     sudo apt-get -f install -y # missing dependencies
     sudo apt autoremove -y #unused packages
