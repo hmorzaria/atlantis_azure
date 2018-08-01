@@ -107,60 +107,7 @@ Specify user password
 
     sudo passwd atlantis
 
-### 3. Install Google Drive
-#### Using gdrive https://github.com/prasmussen/gdrive#downloads
-```sh
-sudo apt-get update
-sudo wget -O gdrive https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download
 
-sudo chmod +x gdrive
-sudo cp gdrive /usr/local/bin
-gdrive about 
-```
-##### In the last step you will be prompted for a verification code and given a url, which authenticates the user account for the drive
-##### to upload folders
-##### gdrive sync upload test.txt
-##### see further instructions in http://linuxnewbieguide.org/?p=1078
-
-### 4.  Install dropbox
-
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-    ~/.dropbox-dist/dropboxd
-
-##### You will then see output like this
-"This client is not linked to any account..."
-"Please visit https://www.dropbox.com/cli_link?host_id=7d44a489aa58f285f2da0x67334d02c1 to link this machine."
-
-* Leave the dropbox process running in the server (client not linked  message as above)
-* Open a browser in your local desktop 
-* Paste the URL given in the client not linked stage 
-* If you get a link not found, kill the dropbox process (CTRL+C) and try again, quickly, it might require a few tries
-* Enter your dropbox password if prompted
-* You should then receive a message to confirm the client has been linked.
-* Switch back to your other computer where the linking process is still running and after a second or two it should link!
-
-Instructions follow http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment#Type_the_link_on_a_computer_which_has_a_browser
-
-##### Install dropox client
-#
-```sh
-mkdir -p ~/bin
-wget -O ~/bin/dropbox.py "https://www.dropbox.com/download?dl=packages/dropbox.py"
-chmod +x ~/bin/dropbox.py
-~/bin/dropbox.py start
-```
-##### Check status of dropbox
-#
-    ~/bin/dropbox.py status
-
-##### Set selective sync in dropbox by telling it what folders to exclude from your dropbox account
-##### Also checks that all requested folders have been excluded
-
-[wait one minute after starting dropbox]
-```sh
-~/bin/dropbox.py exclude add ~/Dropbox/Myfolder1 ~/Dropbox/Myfolder2
-~/bin/dropbox.py exclude list
-```
 ##### Edit the CRONTAB file to make sure everything updates appropriately by typing the command:
 
    crontab -e
@@ -183,14 +130,14 @@ If prompted choose nano as editor
     rm -rv ~/Dropbox
 
 
-### 5. Assign R library path
+### 3. Assign R library path
 
      sudo nano ~/.profile
 
 Add the following line. Check if R version is correct
 > R_LIBS_USER='/home/atlantis/R/x86_64-pc-linux-gnu-library/3.3.1'
 
-### 6. Build Atlantis
+### 4. Build Atlantis
 
 ##### Check out Atlantis code
 ##### Put the username and password at the end
@@ -227,7 +174,7 @@ and try again
      ls -l
 
 
-### 7. Clean up server
+### 5. Clean up server
 
 ##### Cleaning up of partial package:
 
