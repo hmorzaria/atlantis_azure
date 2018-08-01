@@ -51,7 +51,7 @@ sudo passwd data_user
     sudo apt-get -f install -y # missing dependencies
     sudo apt autoremove -y #unused packages
 ```
-## 4. Install R and R Studio Server
+## 3. Install R and R Studio Server
 
 ##### Update repository so that we get the latest R
 #
@@ -129,7 +129,7 @@ sudo su - -c "R --vainilla -e \"install.packages('pdftools', repos='http://cran.
 sudo su - -c "R --vainilla -e \"devtools::install_github('alketh/atlantistools')\""
 
 ```
-## 5. [OPTIONAL] Install Jupyter notebook
+## 4. [OPTIONAL] Install Jupyter notebook
 Jupyter Notebook offers an interactive web interface to many languages, including IPython and R.    
     
 Check Phyton version and pip is installed
@@ -147,7 +147,7 @@ To connect to Jupyter notebook use SSH (PuTTY on Windows). Specify Tunlocalhost:
 Image screens for PuTTY set up are here 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-notebook-to-run-ipython-on-ubuntu-16-04
 
-## 6.Install AzCopy
+## 5.Install AzCopy
 Allows upload of data to a blob storage account.
 Install .Net Core first
 ```sh
@@ -162,7 +162,7 @@ sudo apt-get update
 sudo apt-get install -y azcopy
 ```
 
-## 7. Clean up server
+## 6. Clean up server
 ##### Cleaning up of partial package
 #
     sudo apt-get autoclean
@@ -175,7 +175,7 @@ sudo apt-get install -y azcopy
 #
     sudo apt-get autoremove
 
-## 6. Deprovison user
+## 7. Deprovison user
 ###### Required before generalizing machine
 ##### in SSH window
 #
@@ -185,7 +185,7 @@ Then exit the VM
 
     exit
     
-## 7. Create image template
+## 8. Create image template
 #### Following https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/
 #
 ##### The following steps assume you already have installed Azure Command Line tools (Azure CLI)
