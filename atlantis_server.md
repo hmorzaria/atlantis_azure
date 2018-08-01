@@ -1,9 +1,9 @@
 # Current Configuration Ubuntu Server 18.04 (Bionic Beaver)
-# This script details how to create a Virtual machine (instance) directly in the resource panel (Azure Portal)
-# For use in Atlantis simulations
-# Not using templates
+## This script details how to create a Virtual machine (instance) directly in the resource panel (Azure Portal)
+## For use in Atlantis simulations
+### Does not use a template
  NOTE DS SERIES AND SSD AS STORAGE CANNOT BE USED WITH THESE INSTRUCTIONS, AND IS MORE EXPENSIVE. 
-#
+##
 Check the version of your OS
 
      lsb_release -a
@@ -19,6 +19,7 @@ To list all possible zones
 
 
 ##### Add new user (optional)
+Rstudio often requires the password to be reset
 Will need input for password
 ``` sh
 sudo adduser data_user
@@ -56,7 +57,7 @@ sudo su - data_user # change user
 ##### Update repository so that we get the latest R
 #
 ```sh
-sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/bionic-cran35/" >> /etc/apt/sources.list'
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
@@ -69,8 +70,8 @@ sudo apt-get -y install r-base
 
 ```sh
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
-sudo gdebi --n rstudio-server-1.0.143-amd64.deb
+wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
+sudo gdebi rstudio-server-1.1.456-amd64.deb
 
 ```
 Verify installation
@@ -86,10 +87,13 @@ Install R packages to common library. These
 These are some common packages for data analysis, spatial analysis, map creation, and Atlantis. Also includes packages to create markdown documents.
 ```sh
 
-sudo su - -c "R --vainilla -e \"install.packages(c('shiny','sp','dismo', 'data.table', 'XML','jsonlite','httr','rvest', 'tidyverse','knitr','rgdal','proj4','ggplot2','ggthemes','ggmap','RColorBrewer','RNetCDF','readr', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra','devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable','reshape2', 'RNetCDF','doSNOW','stringr','stringi','parallel','future'), repos = 'http://cran.rstudio.com/')\""
+sudo su - -c "R --vainilla -e \"install.packages(c('tidyverse','sp','dismo', 'data.table', 'XML','jsonlite','httr','rvest', 'knitr','rgdal','proj4','ggthemes','ggmap','RColorBrewer','RNetCDF','readr', 'classInt','rgeos','maps','maptools','knitcitations','plotrix','gridExtra',
+'devtools','scales','magrittr','Hmisc','readxl','cowplot','xtable','gtable',
+'raster','reshape2', 'RNetCDF','doSNOW','stringr','stringi','parallel','future'), repos = 'http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('pdftools', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"devtools::install_github('alketh/atlantistools')\""
+sudo su - -c "R -e \"devtools::install_github('jporobicg/shinyrAtlantis')\""
 
 ```
 
