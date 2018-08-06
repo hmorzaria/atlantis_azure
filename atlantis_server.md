@@ -36,7 +36,7 @@ sudo su - data_user # change user
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
 
-    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi cdo nco libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop libprotobuf-dev protobuf-compiler
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi cdo nco libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl python2.7 python-pip python-dev libpoppler-cpp-dev htop libprotobuf-dev protobuf-compiler librsvg2-dev
     
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
@@ -132,7 +132,15 @@ and try again
 ##### check that atlantisNew.exe has been created
 #
      ls -l
+     
+     
+### 6. Install AzCopy
 
+    wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64
+    tar -xf azcopy.tar.gz
+    sudo ./install.sh
+    
+   
 #### OPTIONAL. Install eclipse development environment for Linux
 
 Use if for some reason you need a browser or other GUI based software 
