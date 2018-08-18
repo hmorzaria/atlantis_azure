@@ -57,7 +57,11 @@ sudo su - data_user # change user
 ##### Update repository so that we get the latest R
 #
 ```sh
-sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/bionic-cran35/" >> /etc/apt/sources.list'
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+
+sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" >> /etc/apt/sources.list'
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
