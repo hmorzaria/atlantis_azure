@@ -36,7 +36,7 @@ sudo su - data_user # change user
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
 
-    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi cdo nco libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl libgeos++-dev python2.7 python-pip python-dev libpoppler-cpp-dev htop libprotobuf-dev protobuf-compiler librsvg2-dev libx11-dev mesa-common-dev libglu1-mesa-dev texlive-latex-extra libcairo2 libcairo2-dev
+    sudo apt-get install -y subversion build-essential subversion flip autoconf libnetcdf-dev libxml2-dev libproj-dev lsscsi cdo nco libudunits2-dev curl gdebi-core libssl-dev openssl libapparmor1 libv8-dev libgeos-dev libgdal-dev libproj-dev proj-bin proj-data rpm ntp ntpdate gdal-bin libproj12 libproj-dev libgdal-dev libgeo-proj4-perl libgeos++-dev python2.7 python-pip python-dev libpoppler-cpp-dev htop libprotobuf-dev protobuf-compiler librsvg2-dev libx11-dev mesa-common-dev libglu1-mesa-dev texlive-latex-extra libcairo2 libcairo2-dev netcdf-bin
     
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
