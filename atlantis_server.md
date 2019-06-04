@@ -106,24 +106,24 @@ sudo su - -c "R -e \"devtools::install_github('jporobicg/shinyrAtlantis')\""
 ##### Check out Atlantis code
 ##### Put the username and password at the end
 #
-    svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/branches/bec_dev --username yourusername --password yourpassword 
+    svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/trunk --username <username> --password <password> --quiet
 
 ##### Compile Atlantis
 ##### Switch folder 
 #
-    cd bec_dev/atlantis
+    cd trunk/atlantis
 ##### Build Atlantis code
 #
 
 ```sh 
-aclocal
-autoheader
-autoconf
-automake -a
-./configure
-make
-sudo make install
-cd atlantismain
+        aclocal
+        autoheader
+        autoconf
+        automake -a
+        ./configure
+        sudo make CFLAGS='-Wno-misleading-indentation -Wno-format -Wno-implicit-fallthrough'
+        sudo make -d install
+        cd atlantismain
 ```
 
 
