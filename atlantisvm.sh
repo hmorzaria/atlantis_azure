@@ -120,11 +120,10 @@ sudo su - -c "R -e \"devtools::install_github('Azure/doAzureParallel')\""
 
 echo "Install AzCopy" 
 
-sudo apt-get update && sudo apt-get -y upgrade &&\
-sudo apt-get -y install rsync wget &&\
-wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinuxrhel6 &&\
-tar -xzf azcopy.tar.gz &&\
-./install.sh &&\
+sudo apt-get -y install rsync wget
+wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinuxrhel6
+tar -xzf azcopy.tar.gz
+sudo ./install.sh
 sudo rm -Rf azcopy* install.sh
     
 if [ -d $HOME/bin ]; then
