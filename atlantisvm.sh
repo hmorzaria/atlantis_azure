@@ -75,10 +75,7 @@ sudo apt-get install gdebi-core
 wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
 sudo gdebi rstudio-server-1.1.456-amd64.deb
 
-sudo su - -c "R --vainilla -e \"install.packages(c('tidyverse','sp','dismo','digest','data.table', 'XML','jsonlite','httr','rvest', \
-'knitr','rgdal','proj4','ggthemes','RColorBrewer','RNetCDF','readr', 'classInt','rgeos','maps','maptools','plotrix','gridExtra', \
-'devtools','scales','magrittr','Hmisc','readxl','cowplot','raster','reshape2', 'RNetCDF','doSNOW','stringr','stringi','parallel', \
-'future'), repos = 'http://cran.rstudio.com/')\""
+echo "Install R packages"
 
 sudo su - -c "R --vainilla -e \"install.packages(c( \
     'classInt', \
