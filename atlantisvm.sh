@@ -48,7 +48,8 @@ sudo apt-get update -qq && sudo apt-get -y --no-install-recommends install \
     ntp \
     ntpdate \
     subversion \
-    texlive-latex-extra   
+    texlive-latex-extra  \
+    nedit
     
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 sudo apt install gdal-bin python-gdal python3-gdal -y
