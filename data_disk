@@ -1,0 +1,43 @@
+When attaching a datadisk to an Azure VM running Ubuntu OS need to follow these instructions:
+Modified from : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal, https://togaware.com/running-an-r-workshop-on-azure-linux-data-science-virtual-machine/
+The disk is visible as /dev/sdc1
+```sh
+dmesg | grep SCSI
+```
+Format the disk
+    sudo fdisk /dev/sdc1
+Type
+```sh
+    n (new partition)
+    p (primary)
+    <enter> (1)
+    <enter> (2048)
+    <enter> (last sector)
+p (create partition)
+w (write partition)
+```
+
+    sudo mkfs -t ext4 /dev/sdd1
+Create a temporary mount point and mount
+$ sudo mkdir /mnt/tmp
+$ sudo mount /dev/sdd1 /mnt/tmp
+$ mount | grep /sdc1
+We will use this disk to mount as /home by default, so set that up
+Check how much disk is used for /home
+$ sudo du -sh /home
+Synchronise /home to the new disk
+$ sudo rsync -avzh /home/ /mnt/tmp/
+Identify the unique identifier for the disk
+$ sudo -i blkid | grep sdc1
+Tell the system to mount the new disk as /home
+$ sudo emacs /etc/fstab
+Add the following single line with the appropriate UUID
+UUID=f395b783-31da-4916-a3a9-8fb56fd7a068 /home ext4 defaults,nofail,discard 1 2
+Now mount the new disk as /home
+$ sudo mount /home
+No longer need the temporary mount so unmount
+$ sudo umount /mnt/tmp
+Move to the new version of home and ensure ssh can access
+$ cd ~
+$ df -h .
+$ sudo restorecon -r /home
