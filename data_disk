@@ -5,9 +5,8 @@ The disk is visible as /dev/sdc1
 $ dmesg | grep SCSI
 
 Format the disk
-$ sudo fdisk /dev/sdc1
+$ sudo fdisk /dev/sdc
 Type
-    sh
     n (new partition)
     p (primary)
     <enter> (1)
@@ -20,7 +19,7 @@ $ sudo mkfs -t ext4 /dev/sdc1
 
 Create a temporary mount point and mount
 $ sudo mkdir /mnt/tmp
-$ sudo mount /dev/sdd1 /mnt/tmp
+$ sudo mount /dev/sdc1 /mnt/tmp
 $ mount | grep /sdc1
 
 We will use this disk to mount as /home by default, so set that up
@@ -48,4 +47,5 @@ $ sudo umount /mnt/tmp
 Move to the new version of home and ensure ssh can access
 $ cd ~
 $ df -h .
+$ sudo apt-get install policycoreutils -y
 $ sudo restorecon -r /home
