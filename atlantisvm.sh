@@ -31,6 +31,7 @@ sudo apt-get update -qq && sudo apt-get -y --no-install-recommends install \
     libglu1-mesa-dev \
     libpoppler-cpp-dev \
     libprotobuf-dev \
+    libproj-dev \
     librsvg2-dev \
     libx11-dev \
     lsscsi \
