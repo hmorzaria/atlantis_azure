@@ -1,8 +1,10 @@
-When attaching a datadisk to an Azure VM running Ubuntu OS need to follow these instructions:
-Modified from : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal, https://togaware.com/running-an-r-workshop-on-azure-linux-data-science-virtual-machine/
-The disk is visible as /dev/sdc1
+When attaching a datadisk to an Azure VM running Ubuntu OS need to follow these instructions
 
 $ dmesg | grep SCSI
+
+1) For disks 1 Tera or smaller
+Modified from : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal, https://togaware.com/running-an-r-workshop-on-azure-linux-data-science-virtual-machine/
+The disk is visible as /dev/sdc1
 
 Format the disk
 $ sudo fdisk /dev/sdc
@@ -15,6 +17,20 @@ Type
 p (create partition)
 w (write partition)
 
+2) For disks 2 Tera or larger
+Modified from https://linuxconfig.org/how-to-manage-partitions-with-gnu-parted-on-linux
+
+$ sudo parted /dev/sdc
+    (parted) print
+    (parted) mklabel
+    New disk label type? msdos
+    (parted) mkpart
+    Partition type?  primary/extended? primary
+    File system type?  [ext2]?
+    Start? 1MiB
+    End? 100% 
+    (parted) print
+    
 $ sudo mkfs -t ext4 /dev/sdc1
 
 Create a temporary mount point and mount
@@ -32,7 +48,7 @@ $ sudo rsync -avzh /home/ /mnt/tmp/
 Identify the unique identifier for the disk
 $ sudo -i blkid | grep sdc1
 
-Tell the system to mount the new disk as /home
+Update the fstab with the correct disk identifier
 $ sudo nano /etc/fstab
 
 Add the following single line with the appropriate UUID
