@@ -11,7 +11,9 @@ sudo apt-get dist-upgrade -y
 sudo apt-get update -qq && sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
+    default-jd \
     curl \
+    gdal-bin \
     flip \
     libcairo2 \
     libcairo2-dev \
@@ -35,6 +37,7 @@ sudo apt-get update -qq && sudo apt-get -y --no-install-recommends install \
     librsvg2-dev \
     libx11-dev \
     lsscsi \
+    openjdk-8-jdk \
     python2.7 \
     python-pip \
     python-dev \
