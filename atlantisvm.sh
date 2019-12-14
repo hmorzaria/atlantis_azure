@@ -8,10 +8,9 @@ sudo timedatectl set-timezone America/Los_Angeles
 sudo apt-get update -y
 sudo apt-get dist-upgrade -y
 
-sudo apt-get update -qq && sudo apt-get -y --no-install-recommends install \
+sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
-    default-jd \
     curl \
     gdal-bin \
     flip \
