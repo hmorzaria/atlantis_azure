@@ -56,11 +56,12 @@ sudo apt-get -y --no-install-recommends install \
     cdo
     
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-sudo apt install gdal-bin python-gdal python3-gdal -y
-    
+sudo apt install gdal-bin -y
+   
 sudo add-apt-repository -y ppa:opencpu/jq
 sudo apt-get update -qq
 sudo apt-get install libjq-dev -y
+sudo apt install python-gdal python3-gdal -y
     
 sudo apt-get -f install -y # missing dependencies
 sudo apt autoremove -y #unused packages
@@ -87,7 +88,6 @@ sudo su - -c "R --vainilla -e \"install.packages(c( \
     'cowplot', \
     'digest', \
     'data.table', \
-    'doSNOW', \
     'devtools', \
     'dismo', \
     'fields', \
