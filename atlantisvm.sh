@@ -11,6 +11,8 @@ sudo apt-get dist-upgrade -y
 sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
+    libcurl4 \
+    libcurl4-openssl-dev \
     curl \
     gdal-bin \
     flip \
