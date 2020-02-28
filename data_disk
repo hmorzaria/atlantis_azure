@@ -61,7 +61,7 @@ No longer need the temporary mount so unmount
 $ sudo umount /mnt/tmp
 
 Move to the new version of home and ensure ssh can access
-$ cd ~
-$ df -h .
+$ sudo apt-get update
+$ sudo apt-get upgrade
 $ sudo apt-get install policycoreutils -y
 $ sudo restorecon -r /home
