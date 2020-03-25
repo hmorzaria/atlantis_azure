@@ -1,5 +1,16 @@
+
 #Copying All Containers in an Azure Storage account with PowerShell
 #https://dcdevs.blogspot.com/2017/06/copying-azure-blob-storage-containers.html
+#https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7
+#https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1
+
+# Instal Azure powershell, make sure your computer has the right execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+Import-Module Az
+
+#Connect to Azure
+Connect-AzAccount
 
 $SourceAzureAccountName = "SourceAzureAccount"
 $SourceAzureKey = "SourceAzureKey"
