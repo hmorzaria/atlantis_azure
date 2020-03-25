@@ -1,0 +1,25 @@
+#Copying All Containers in an Azure Storage account with PowerShell
+#https://dcdevs.blogspot.com/2017/06/copying-azure-blob-storage-containers.html
+
+$SourceAzureAccountName = "SourceAzureAccount"
+$SourceAzureKey = "SourceAzureKey"
+$DestAzureAccountName = "DestAzureAccount"
+$DestAzureKey = "DestAzureKey"
+$SourceCtx = New-AzureStorageContext $SourceAzureAccountName -StorageAccountKey $SourceAzureKey
+$DestCtx = New-AzureStorageContext $DestAzureAccountName -StorageAccountKey $DestAzureKey
+
+Get-AzureStorageContainer -Context $SourceCtx |  % {
+    $ContainerName = $_.Name
+    try 
+    {
+        New-AzureStorageContainer -Name $ContainerName -Context $DestCtx -ErrorAction Stop
+        "Creating container " + $ContainerName
+    } 
+    catch [Microsoft.WindowsAzure.Commands.Storage.Common.ResourceAlreadyExistException]
+    {
+        "Container " + $ContainerName + " already exists"
+    }
+    
+    $blobs = Get-AzureStorageBlob -Container $ContainerName -Context $SourceCtx
+    $blobs | Start-AzureStorageBlobCopy -DestContainer $ContainerName -DestContext $DestCtx -Force | Out-Null
+}
