@@ -5,14 +5,14 @@ $SourceAzureAccountName = "SourceAzureAccount"
 $SourceAzureKey = "SourceAzureKey"
 $DestAzureAccountName = "DestAzureAccount"
 $DestAzureKey = "DestAzureKey"
-$SourceCtx = New-AzureStorageContext $SourceAzureAccountName -StorageAccountKey $SourceAzureKey
-$DestCtx = New-AzureStorageContext $DestAzureAccountName -StorageAccountKey $DestAzureKey
+$SourceCtx = New-AzStorageContext $SourceAzureAccountName -StorageAccountKey $SourceAzureKey
+$DestCtx = New-AzStorageContext $DestAzureAccountName -StorageAccountKey $DestAzureKey
 
 Get-AzureStorageContainer -Context $SourceCtx |  % {
     $ContainerName = $_.Name
     try 
     {
-        New-AzureStorageContainer -Name $ContainerName -Context $DestCtx -ErrorAction Stop
+        New-AzStorageContainer -Name $ContainerName -Context $DestCtx -ErrorAction Stop
         "Creating container " + $ContainerName
     } 
     catch [Microsoft.WindowsAzure.Commands.Storage.Common.ResourceAlreadyExistException]
@@ -20,6 +20,6 @@ Get-AzureStorageContainer -Context $SourceCtx |  % {
         "Container " + $ContainerName + " already exists"
     }
     
-    $blobs = Get-AzureStorageBlob -Container $ContainerName -Context $SourceCtx
-    $blobs | Start-AzureStorageBlobCopy -DestContainer $ContainerName -DestContext $DestCtx -Force | Out-Null
+    $blobs = Get-AzStorageBlob -Container $ContainerName -Context $SourceCtx
+    $blobs | Start-AzStorageBlobCopy -DestContainer $ContainerName -DestContext $DestCtx -Force | Out-Null
 }
