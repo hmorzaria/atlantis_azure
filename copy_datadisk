@@ -1,7 +1,9 @@
-#Azure CLI script
-#https://docs.microsoft.com/en-us/azure/virtual-machines/scripts/virtual-machines-windows-powershell-sample-copy-snapshot-to-same-or-different-subscription
+###1. Create snapshot on Azure portal
+#https://docs.microsoft.com/en-us/azure/virtual-machines/windows/snapshot-copy-managed-disk
 
-#!/bin/bash
+###2. Copy snaphsot as a VHD into a storage account
+#Use this in Azure Cloudshell
+#https://docs.microsoft.com/en-us/azure/virtual-machines/scripts/virtual-machines-windows-powershell-sample-copy-snapshot-to-same-or-different-subscription
 
 #Provide the subscription Id where snapshot is created
 subscriptionId=<subscription id>
@@ -35,3 +37,4 @@ sas=$(az snapshot grant-access --resource-group $resourceGroupName --name $snaps
 az storage blob copy start --destination-blob $destinationVHDFileName --destination-container $storageContainerName --account-name $storageAccountName --account-key $storageAccountKey --source-uri $sas
 
 
+###3.Copy VHD into another storage account
