@@ -127,8 +127,11 @@ sudo su - -c "R -e \"devtools::install_github('Azure/doAzureParallel')\""
 
 echo "Install AzCopy" 
 
-wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xzf azcopy_v10.tar.gz --strip-components=
-    
+wget -O azcopy_7.2.0-netcore_rhel.6_x64.tar https://aka.ms/downloadazcopylinuxrhel6
+tar -xzf azcopy_7.2.0-netcore_rhel.6_x64.tar
+sudo ./install.sh
+sudo rm -Rf azcopy* install.sh
+
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
 fi
