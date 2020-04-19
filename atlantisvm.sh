@@ -93,14 +93,12 @@ sudo su - -c "R --vainilla -e \"install.packages(c( \
     'devtools', \
     'dismo', \
     'fields', \
-    'futures', \
     'ggthemes', \
     'httr', \
     'Hmisc', \
     'jsonlite', \
     'maps', \
     'maptools', \
-    'parallel', \
     'proj4', \
     'plotrix', \
     'gridExtra', \
