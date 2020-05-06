@@ -79,9 +79,9 @@ sudo apt-get -y install r-base
 
 echo "Install R studio" 
 
-sudo apt-get install -y gdebi-core
-wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
-sudo gdebi rstudio-server-1.1.456-amd64.deb --n
+sudo apt-get install gdebi-core
+wget https://download2.rstudio.org/server/trusty/amd64/rstudio-server-1.2.5042-amd64.deb
+sudo gdebi rstudio-server-1.2.5042-amd64.deb
 
 echo "Install R packages"
 
