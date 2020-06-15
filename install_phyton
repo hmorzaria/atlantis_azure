@@ -1,0 +1,29 @@
+##Used Anaconda Phyton distribution installation instructions from https://www.digitalocean.com/community/tutorials/how-to-install-anaconda-on-ubuntu-18-04-quickstart
+    
+    curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+
+##Verify data integrity of the installer
+    sha256sum Anaconda3-2019.03-Linux-x86_64.sh
+    
+##Run the Anaconda script
+    bash Anaconda3-2019.03-Linux-x86_64.sh
+    
+##Choose enter and enter yes at the end when asked "Do you wish the installer to prepend the Anaconda3 install location to PATH?"
+    sudo source ~/.bashrc
+#Test that the conda installation works
+    conda list
+    
+#if conda command is not found use 
+    export PATH=~/anaconda3/bin:$PATH
+    conda init
+
+#Note conda cannot be used with superuser privileges, give write permission to folder
+    sudo chown -R username /home/username/path-to-conda-folder/
+    sudo chmod -R +x /home/username/path-to-conda-folder/
+    
+#Rstudio needs the virtualenv package
+    pip install virtualenv
+
+#To install packages
+    conda install -c conda-forge intake xarray dask netCDF4 bottleneck proplot matplotlib
+ 
