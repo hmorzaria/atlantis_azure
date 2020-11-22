@@ -2,11 +2,12 @@ When attaching a datadisk to an Azure VM running Ubuntu OS need to follow these 
 
 $ dmesg | grep SCSI
 
-1) For disks 1 Tera or smaller
+1. Format the Disk
+
+A) For disks 1 Tera or smaller
 Modified from : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal, https://togaware.com/running-an-r-workshop-on-azure-linux-data-science-virtual-machine/
 The disk is visible as /dev/sdc1
 
-Format the disk
 $ sudo fdisk /dev/sdc
 Type
     n (new partition)
@@ -17,7 +18,7 @@ Type
 p (create partition)
 w (write partition)
 
-2) For disks 2 Tera or larger
+B) For disks 2 Tera or larger
 Modified from https://linuxconfig.org/how-to-manage-partitions-with-gnu-parted-on-linux
 
 $ sudo parted /dev/sdc
@@ -30,37 +31,42 @@ $ sudo parted /dev/sdc
     Start? 1MiB
     End? 100% 
     (parted) print
-    
+
+************
+When done hit CTRL + C to exit the format utility
+
+2. Make file system
+
 $ sudo mkfs -t ext4 /dev/sdc1
 
-Create a temporary mount point and mount
+3. Create a temporary mount point and mount
 $ sudo mkdir /mnt/tmp
 $ sudo mount /dev/sdc1 /mnt/tmp
 $ mount | grep /sdc1
 
-We will use this disk to mount as /home by default, so set that up
+4. We will use this disk to mount as /home by default, so set that up
 Check how much disk is used for /home
 $ sudo du -sh /home
 
-Synchronise /home to the new disk
+5. Synchronise /home to the new disk
 $ sudo rsync -avzh /home/ /mnt/tmp/
 
-Identify the unique identifier for the disk
+6. Identify the unique identifier for the disk
 $ sudo -i blkid | grep sdc1
 
-Update the fstab with the correct disk identifier
+7. Update the fstab with the correct disk identifier
 $ sudo nano /etc/fstab
 
 Add the following single line with the appropriate UUID
 UUID=f395b783-31da-4916-a3a9-8fb56fd7a068 /home ext4 defaults,nofail,discard 1 2
 
-Now mount the new disk as /home
+8. Now mount the new disk as /home
 $ sudo mount /home
 
-No longer need the temporary mount so unmount
+9. No longer need the temporary mount so unmount
 $ sudo umount /mnt/tmp
 
-Move to the new version of home and ensure ssh can access
+10. Move to the new version of home and ensure ssh can access
 $ sudo apt-get update
 $ sudo apt-get upgrade
 $ sudo apt-get install policycoreutils -y
