@@ -80,48 +80,8 @@ sudo apt-get -y install r-base
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/trusty/amd64/rstudio-server-1.2.5042-amd64.deb
-sudo gdebi rstudio-server-1.2.5042-amd64.deb
-
-echo "Install R packages"
-
-sudo su - -c "R --vainilla -e \"install.packages(c( \
-    'classInt', \
-    'cowplot', \
-    'digest', \
-    'data.table', \
-    'devtools', \
-    'dismo', \
-    'fields', \
-    'ggthemes', \
-    'httr', \
-    'Hmisc', \
-    'jsonlite', \
-    'maps', \
-    'maptools', \
-    'proj4', \
-    'plotrix', \
-    'gridExtra', \
-    'raster', \
-    'readxl', \
-    'readr', \
-    'rgdal', \
-    'rgeos', \
-    'rvest', \
-    'RNetCDF', \
-    'RColorBrewer', \
-    'raster', \
-    'tidyverse', \
-    'stringr', \
-    'stringi', \
-    'sp', \
-    'XML'), \
-    dependencies = TRUE, repos = 'http://cran.rstudio.com/')\""
-  
-sudo su - -c "R -e \"devtools::install_github('jporobicg/shinyrAtlantis')\""
-sudo su - -c "R -e \"devtools::install_github('Atlantis-Ecosystem-Model/ReactiveAtlantis')\""
-sudo su - -c "R -e \"devtools::install_github('Azure/rAzureBatch')\""
-sudo su - -c "R -e \"devtools::install_github('Azure/doAzureParallel')\""
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1106-amd64.deb
+sudo gdebi rstudio-server-1.4.1106-amd64.deb
 
 echo "Install AzCopy" 
 
