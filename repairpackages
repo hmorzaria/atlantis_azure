@@ -5,3 +5,8 @@ $ sudo apt clean
 $ sudo apt autoremove
 
 $ sudo apt update
+
+overwrite packages
+https://askubuntu.com/questions/176121/dpkg-error-trying-to-overwrite-file-which-is-also-in#comment1035373_433510
+
+sudo apt-get -o Dpkg::Options::="--force-overwrite" install
