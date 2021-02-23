@@ -1,0 +1,7 @@
+$ sudo dpkg --configure -a
+
+$ sudo apt remove --purge <package_name>
+$ sudo apt clean
+$ sudo apt autoremove
+
+$ sudo apt update
