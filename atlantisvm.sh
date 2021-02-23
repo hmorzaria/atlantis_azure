@@ -68,20 +68,18 @@ sudo apt install python-gdal python3-gdal -y
 sudo apt-get -f install -y # missing dependencies
 sudo apt autoremove -y #unused packages
        
+sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
-
-sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" >> /etc/apt/sources.list'
-gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
-sudo apt-get update -qq
+sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt-get -y install r-base
 
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/trusty/amd64/rstudio-server-1.2.5042-amd64.deb
-sudo gdebi rstudio-server-1.2.5042-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1106-amd64.deb
+sudo gdebi rstudio-server-1.4.1106-amd64.deb
+
+
 
 echo "Install R packages"
 
