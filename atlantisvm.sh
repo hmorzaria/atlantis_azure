@@ -80,15 +80,14 @@ sudo apt-get -y install r-base
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1106-amd64.deb
-sudo gdebi rstudio-server-1.4.1106-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
+sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
 
 echo "Install AzCopy" 
 
-wget -O azcopy_7.2.0-netcore_rhel.6_x64.tar https://aka.ms/downloadazcopylinuxrhel6
-tar -xzf azcopy_7.2.0-netcore_rhel.6_x64.tar
-sudo ./install.sh
-sudo rm -Rf azcopy* install.sh
+wget -O azcopy_linux_amd64_10.13.0.tar https://aka.ms/downloadazcopy-v10-linux
+tar -xzf azcopy_linux_amd64_10.13.0.tar
+sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
 
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
