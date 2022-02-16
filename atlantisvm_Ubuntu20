@@ -17,6 +17,8 @@ sudo apt-get -y --no-install-recommends install \
     gdal-bin \
     flip \
     libcairo2 \
+    libharfbuzz-dev \
+    libfribidi-dev \
     libcairo-5c0 \
     libapparmor1 \
     libhdf5-dev \
