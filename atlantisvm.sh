@@ -85,8 +85,8 @@ sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
 
 echo "Install AzCopy" 
 
-wget -O azcopy_linux_amd64_10.13.0.tar https://aka.ms/downloadazcopy-v10-linux
-tar -xzf azcopy_linux_amd64_10.13.0.tar
+wget -O azcopy_linux_amd64_10.14.1.tar https://aka.ms/downloadazcopy-v10-linux
+tar -xzf azcopy_linux_amd64_10.14.1.tar
 sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
 
 if [ -d $HOME/bin ]; then
