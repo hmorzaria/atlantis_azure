@@ -80,8 +80,8 @@ sudo apt-get -y install r-base
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
-sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.02.0-443-amd64.deb
+sudo gdebi rstudio-server-2022.02.0-443-amd64.deb
 
 echo "Install AzCopy" 
 
