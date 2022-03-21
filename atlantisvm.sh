@@ -40,7 +40,7 @@ sudo apt-get -y --no-install-recommends install \
     lsscsi \
     openjdk-8-jdk \
     python2.7 \
-    python-pip \
+    python3-pip \
     python-dev \
     proj-bin \
     proj-data \
