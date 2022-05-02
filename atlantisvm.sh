@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "This script expects Ubuntu Server 18.04 (Bionic Beaver)"
+echo "This script expects Ubuntu Server 18.04.06 LTS (Bionic Beaver)"
 echo "Will install all dependencies, libraries, Rstudio and needed packages to run Atlantis and analyze output"
 
 sudo timedatectl set-timezone America/Los_Angeles
@@ -68,20 +68,27 @@ sudo apt install python-gdal python3-gdal -y
 sudo apt-get -f install -y # missing dependencies
 sudo apt autoremove -y #unused packages
        
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
+# update indices
+sudo apt update -qq
+# install two helper packages we need
+sudo apt install --no-install-recommends software-properties-common dirmngr
+# add the signing key (by Michael Rutter) for these repos
+# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
+# Fingerprint: 298A3A825C0D65DFD57CBB651716619E084DAB9
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 
-sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" >> /etc/apt/sources.list'
-gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
-sudo apt-get update -qq
-sudo apt-get -y install r-base
+sudo apt install --no-install-recommends r-base
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+
+sudo apt install --no-install-recommends r-cran-tidyverse
 
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.02.0-443-amd64.deb
-sudo gdebi rstudio-server-2022.02.0-443-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.02.2-485-amd64.deb
+sudo gdebi rstudio-server-2022.02.2-485-amd64.deb
 
 echo "Install AzCopy" 
 
