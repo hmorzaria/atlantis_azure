@@ -6,7 +6,7 @@ echo "Will install all dependencies, libraries, Rstudio and needed packages to r
 sudo timedatectl set-timezone America/Los_Angeles
 
 sudo apt-get update -y
-sudo apt-get dist-upgrade -y
+sudo apt-get upgrade -y
 
 sudo apt-get -y --no-install-recommends install \
     autoconf \
