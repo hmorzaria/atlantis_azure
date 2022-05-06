@@ -67,7 +67,7 @@ $ sudo mount /home
 $ sudo umount /mnt/tmp
 
 10. Move to the new version of home and ensure ssh can access
-$ sudo apt-get update
-$ sudo apt-get upgrade
+$ sudo apt-get update -y
+$ sudo apt-get upgrade -y
 $ sudo apt-get install policycoreutils -y
 $ sudo restorecon -r /home
