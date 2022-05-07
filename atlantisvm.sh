@@ -12,7 +12,6 @@ sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
     build-essential \
-    libtool \ 
     m4 \
     gfortran \
     libcurl4 \
