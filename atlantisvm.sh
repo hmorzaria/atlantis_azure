@@ -86,7 +86,7 @@ sudo apt install --no-install-recommends r-cran-tidyverse
 
 echo "Install R studio" 
 
-sudo apt-get install gdebi-core
+sudo apt-get install gdebi-core -y
 wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.02.2-485-amd64.deb
 sudo gdebi rstudio-server-2022.02.2-485-amd64.deb
 
