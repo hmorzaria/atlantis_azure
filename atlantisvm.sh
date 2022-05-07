@@ -11,6 +11,10 @@ sudo apt-get upgrade -y
 sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
+    build-essential \
+    libtool \ 
+    m4 \
+    gfortran \
     libcurl4 \
     libcurl4-openssl-dev \
     curl \
