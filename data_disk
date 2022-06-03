@@ -18,8 +18,9 @@ Type
 p (create partition)
 w (write partition)
 
-B) For disks 2 Tera or larger
+B) For disks 2 Tera or larger. 
 Modified from https://linuxconfig.org/how-to-manage-partitions-with-gnu-parted-on-linux
+NOTE: MS-DOS does not allow partitioning drives higher than 2 Tera. https://www.cyberciti.biz/tips/fdisk-unable-to-create-partition-greater-2tb.html
 
 $ sudo parted /dev/sdc
     (parted) print
