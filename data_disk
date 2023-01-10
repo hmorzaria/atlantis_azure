@@ -1,5 +1,6 @@
 When attaching a datadisk to an Azure VM running Ubuntu OS need to follow these instructions
 
+$ sudo lsblk
 $ sudo dmesg | grep SCSI
 
 1. Format the Disk
