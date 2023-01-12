@@ -81,6 +81,7 @@ wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sud
 # add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
 sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 sudo apt install --no-install-recommends r-base
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 
 echo "Install R studio" 
 
