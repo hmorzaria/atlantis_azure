@@ -52,15 +52,38 @@ sudo apt-get -y --no-install-recommends install \
     cdo \
     gfortran
  
+#use this to install Proj4 which is required for Atlantis 
+#https://gist.github.com/robinkraft/2a8ee4dd7e9ee9126030
+#http://grasswiki.osgeo.org/wiki/Compile_and_Install_Ubuntu#PROJ4
+ 
+sudo apt-get install subversion
+
+cd /tmp
+svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/
+
+cd /tmp/proj/nad
+sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
+
+unzip -o -q proj-datumgrid-1.5.zip
+
+#make distclean
+
+cd /tmp/proj/
+
+./configure  &&  make  &&  sudo make install && sudo ldconfig 
+ 
+ 
 #https://github.com/r-spatial/sf#multiple-gdal-geos-andor-proj-versions-on-your-system
 #https://stackoverflow.com/questions/60759865/error-when-installing-sf-in-r-double-free-or-corruption
 #to remove a respository https://askubuntu.com/questions/866901/what-can-i-do-if-a-repository-ppa-does-not-have-a-release-file
 
-sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev -y
+#sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+#sudo apt-get update -y
+#sudo apt-get upgrade -y
+#sudo apt-get dist-upgrade -y
+
+#these might be needed to install spatial R programs
+sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev -y
    
 sudo add-apt-repository -y ppa:opencpu/jq
 sudo apt-get update -qq
