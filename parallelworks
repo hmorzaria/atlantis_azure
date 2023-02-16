@@ -1,0 +1,27 @@
+#Parallel work nodes are running Centos OS
+  sudo yum makecache
+#libraries necessary for Atlantis
+  sudo yum install -y subversion autoconf netcdf libxml2-devel proj-devel gcc gcc-c++ kernel-devel make
+  
+ #taken from Confluence still need to check
+ #Run subversion:
+
+mkdir ~/AtlantisBuild
+cd AtlantisBuild
+svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/trunk/atlantis
+
+#Compile and build:
+
+cd atlantis
+aclocal
+autoheader
+autoconf
+automake -a
+./configure
+make
+sudo make install 
+ 
+Test Atlantis:
+
+#atlantisMerged -v
+ 
