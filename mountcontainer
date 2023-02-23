@@ -1,0 +1,29 @@
+#Storage account must be created according to https://learn.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support-how-to
+#VM IP should be added to Storage account Networking
+
+
+#give root privileges to user account
+
+sudo -su root
+groups
+usermod -G root newuser
+
+
+#Mount blob storage
+#https://learn.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support-how-to
+
+sudo apt install nfs-kernel-server -y
+
+##mount container
+
+#create directory
+mkdir -p /nfsdata
+
+#create an entry in /etc/fstab
+sudo nano /etc/fstab
+
+#add following line
+<storage-account-name>.blob.core.windows.net:/<storage-account-name>/<container-name>  /nfsdata    nfs defaults,sec=sys,vers=3,nolock,proto=tcp,nofail    0 0
+
+#run to process fstab entries
+sudo mount /nfsdata
