@@ -111,10 +111,28 @@ sudo gdebi rstudio-server-2022.12.0-353-amd64.deb
 
 echo "Install AzCopy" 
 
-wget -O azcopy_linux_amd64_10.16.2.tar https://aka.ms/downloadazcopy-v10-linux
-tar -xzf azcopy_linux_amd64_10.16.2.tar
+wget -O azcopy_linux_amd64_10.17.0.tar https://aka.ms/downloadazcopy-v10-linux
+tar -xzf azcopy_linux_amd64_10.17.0.tar
 sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
 
+echo "Install AzCLI"
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+
+sudo mkdir -p /etc/apt/keyrings
+curl -sLS https://packages.microsoft.com/keys/microsoft.asc |
+    gpg --dearmor |
+    sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
+sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
+
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+    
+sudo apt-get update
+sudo apt-get install azure-cli
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
 fi
