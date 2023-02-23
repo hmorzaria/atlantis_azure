@@ -45,7 +45,6 @@ sudo apt-get -y --no-install-recommends install \
     netcdf-bin \
     ntp \
     ntpdate \
-    subversion \
     texlive-latex-extra \
     nco \
     cdo \
