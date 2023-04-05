@@ -35,7 +35,6 @@ sudo apt-get -y --no-install-recommends install \
     lsscsi \
     openjdk-8-jdk \
     python2 \
-    proj-bin \
     proj-data \
     protobuf-compiler \
     htop \
@@ -53,6 +52,10 @@ sudo apt-get -y --no-install-recommends install \
 #use this to install Proj4 which is required for Atlantis 
 #https://gist.github.com/robinkraft/2a8ee4dd7e9ee9126030
 #http://grasswiki.osgeo.org/wiki/Compile_and_Install_Ubuntu#PROJ4
+#uninstall   proj-bin libproj-dev if present
+#look for proj with locate libproj.so
+# sudo apt install mlocate
+
  
 sudo apt-get install subversion
 
