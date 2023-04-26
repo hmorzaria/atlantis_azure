@@ -57,7 +57,7 @@ sudo apt-get -y --no-install-recommends install \
 # sudo apt install mlocate
 
  
-sudo apt-get install subversion
+sudo apt-get install -y subversion make
 
 cd /tmp
 svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/
