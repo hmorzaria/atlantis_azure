@@ -1,0 +1,8 @@
+#'http://ppa.launchpad.net/opencpu/jq/ubuntu bionic Release' does not have a Release file
+#https://askubuntu.com/questions/866901/what-can-i-do-if-a-repository-ppa-does-not-have-a-release-file
+#https://help.ubuntu.com/community/EOLUpgrades
+
+sudo apt install ubuntu-release-upgrader-core
+#remove repositories that return error
+sudo add-apt-repository --remove http://ppa.launchpad.net/opencpu/jq/ubuntu
+sudo apt install update-manager-core
