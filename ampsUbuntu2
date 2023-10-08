@@ -1,0 +1,205 @@
+#!/bin/bash
+
+echo "This script expects Ubuntu Server 20.04.2 LTS (Focal Fossa)"
+echo "Will install all dependencies, libraries, Rstudio and needed packages to run Atlantis and analyze output"
+
+sudo timedatectl set-timezone America/Los_Angeles
+
+sudo apt-get update -y
+sudo apt-get dist-upgrade -y
+
+./configure  &&  make  &&  sudo make install && sudo ldconfig 
+sudo apt-get -y --no-install-recommends install \
+    autoconf \
+    automake \
+    libcurl4 \
+    libcurl4-openssl-dev \
+    curl \
+    cdo \
+    flip \
+    gfortran
+    gdal-bin \
+    htop \
+    libcairo2 \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libcairo-5c0 \
+    libapparmor1 \
+    libhdf5-dev \
+    libnetcdf-dev \
+    libxml2-dev \
+    libssl-dev \
+    libv4l-0 \
+    libgeotiff5 \
+    libglu1-mesa-dev \
+    libpoppler-cpp-dev \
+    libprotobuf-dev \
+    librsvg2-dev \
+    libx11-dev \
+    lsscsi \
+    libgl1-mesa-glx \
+    libegl1-mesa \
+    libxrandr2 \
+    libxss1 \
+    libxcursor1 \
+    libxcomposite1 \
+    libasound2 \
+    libxi6 \
+    libxtst6 \
+    openjdk-8-jdk \
+    proj-data \
+    protobuf-compiler \
+    openssl \
+    rpm \
+    mesa-common-dev \
+    netcdf-bin \
+    ntp \
+    ntpdate \
+    nco \
+    texlive-latex-extra \
+    wget
+   
+sudo apt install imagemagick-6.q16
+sudo pacman -Sy base-devel tar gzip
+
+#use this to install Proj4 which is required for Atlantis 
+#https://gist.github.com/robinkraft/2a8ee4dd7e9ee9126030
+#http://grasswiki.osgeo.org/wiki/Compile_and_Install_Ubuntu#PROJ4
+#uninstall   proj-bin libproj-dev if present
+#look for proj with locate libproj.so
+# sudo apt install mlocate
+
+#set up conda environment for python
+wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh
+sha256sum Anaconda3-2022.05-Linux-x86_64.sh
+
+#this installation is not silent
+bash Anaconda3-2022.05-Linux-x86_64.sh
+
+#to enter conda environment
+source ~/.bashrc
+
+# Define the name of the conda environment
+ENV_NAME="Salish_sea_env"
+
+## option 1
+# Create the conda environment
+# conda create --name $ENV_NAME python=3.8  --file packages.txt
+
+## option 2
+# Create the conda environment with a fresh installation of Python
+conda create -y -n $ENV_NAME python=3.9
+
+# Activate the conda environment
+conda activate $ENV_NAME
+
+# Install the required packages from packages.txt
+nano packages.txt
+
+conda create --name "Salish_sea_env" --file packages.txt
+
+conda install -c conda-forge pyinterp 
+
+conda install -n base anaconda-anon-usage
+
+#contents of packages.txt, create with nano
+#@EXPLICIT
+#https://repo.continuum.io/pkgs/main/linux-64/python-3.8.2-h191fe78_0.tar.bz2
+#https://repo.anaconda.com/pkgs/main/linux-64/geos-3.8.0-he6710b0_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/libspatialindex-1.9.3-h2531618_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/libcurl-7.67.0-h20c2e04_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/proj-6.2.1-haa6030c_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/pyproj-2.6.1.post1-py38hb3025e9_1.conda
+#https://conda.anaconda.org/conda-forge/noarch/geopy-2.1.0-pyhd3deb0d_0.tar.bz2
+#https://repo.anaconda.com/pkgs/main/linux-64/numpy-1.20.1-py38h93e21f0_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/pandas-1.2.4-py38h2531618_0.conda
+#https://repo.anaconda.com/pkgs/main/linux-64/shapely-1.7.1-py38h98ec03d_0.tar.bz2
+#https://repo.anaconda.com/pkgs/main/linux-64/fiona-1.8.13.post1-py38hc820daa_0.conda
+#https://repo.anaconda.com/pkgs/main/noarch/geopandas-0.8.1-py_0.conda
+#https://anaconda.org/conda-forge/pyinterp/2023.5.0/download/linux-64/pyinterp-2023.5.0-mkl_py38h03b8978_0.conda
+#https://anaconda.org/conda-forge/xarray/2023.8.0/download/noarch/xarray-2023.8.0-pyhd8ed1ab_0.conda
+# Deactivate the conda environment
+conda deactivate
+
+sudo apt-get install -y subversion make
+
+cd /tmp
+svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/
+
+cd /tmp/proj/nad
+sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
+
+unzip -o -q proj-datumgrid-1.5.zip
+
+#make distclean
+
+cd /tmp/proj/
+
+./configure  &&  make  &&  sudo make install && sudo ldconfig 
+ 
+#these might be needed to install spatial R programs but can conflict with Atlantis proj4
+
+#https://github.com/r-spatial/sf#multiple-gdal-geos-andor-proj-versions-on-your-system
+#https://stackoverflow.com/questions/60759865/error-when-installing-sf-in-r-double-free-or-corruption
+#to remove a respository https://askubuntu.com/questions/866901/what-can-i-do-if-a-repository-ppa-does-not-have-a-release-file
+#sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+#sudo apt-get update -y
+#sudo apt-get upgrade -y
+#sudo apt-get dist-upgrade -y
+#sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev -y
+  
+#sudo add-apt-repository -y ppa:opencpu/jq
+#sudo apt-get update -qq
+#sudo apt-get install libjq-dev -y
+
+sudo apt-get -f install -y # missing dependencies
+sudo apt autoremove -y #unused packages
+
+echo "Install R"
+#http://cran.rstudio.com/bin/linux/ubuntu/
+# update indices
+sudo apt update -qq
+# install two helper packages we need
+sudo apt install --no-install-recommends software-properties-common dirmngr
+# add the signing key (by Michael Rutter) for these repos
+# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
+# Fingerprint: E298A3A825C0D65DFD57CBB651716619E084DAB9
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+sudo apt install --no-install-recommends r-base -y
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
+
+echo "Install R studio" 
+
+sudo apt-get install gdebi-core -y
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2023.03.0-386-amd64.deb
+sudo gdebi rstudio-server-2023.03.0-386-amd64.deb
+echo "Install AzCopy" 
+
+#to uninstall azcopy use https://github.com/MicrosoftDocs/azure-docs/issues/18771
+wget -O azcopy_linux_amd64_10.20.1.tar https://aka.ms/downloadazcopy-v10-linux
+tar -xzf azcopy_linux_amd64_10.20.1.tar
+sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
+
+echo "Install AzCLI"
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+
+sudo mkdir -p /etc/apt/keyrings
+curl -sLS https://packages.microsoft.com/keys/microsoft.asc |
+    gpg --dearmor |
+    sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
+sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
+
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+    
+sudo apt-get update
+sudo apt-get install azure-cli
+if [ -d $HOME/bin ]; then
+PATH=$PATH:$HOME/bin
+fi
