@@ -5,6 +5,9 @@
 #use the AZ Mount helper package
 https://learn.microsoft.com/en-us/azure/storage/blobs/network-file-system-protocol-support-how-to#step-5-install-the-aznfs-mount-helper-package
 #install as root user
+
+sudo -su root
+
 wget -O - -q https://github.com/Azure/AZNFS-mount/releases/latest/download/aznfs_install.sh | bash
 
 ##mount container
@@ -25,3 +28,14 @@ sudo mount /nfsdata
 # This will correct a Permission denied	error 
 # The default mode of a newly created NFS 3.0 container is 0750. Non-root users don't have access to the volume. If access from non-root users is required, root users must change the mode to 0755. 
 sudo chmod 0755 /nfsdata
+
+#make sure user has adequate permissions 
+sudo visudo
+#Append the following entry so you can run all commands without a password.
+#<Your_Account_Name> ALL = (ALL) NOPASSWD: ALL
+
+#give write and read permissions
+chmod -R g-w,o-wx /nfsdata
+
+# need to use sudo when accesign /nfsdata
+sudo cp -f sourcedir targetdir.
