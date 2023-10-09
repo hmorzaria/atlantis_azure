@@ -22,4 +22,6 @@ sudo nano /etc/fstab
 sudo mount /nfsdata
 
 #switch to user profile and give permissions
+# This will correct a Permission denied	error 
+# The default mode of a newly created NFS 3.0 container is 0750. Non-root users don't have access to the volume. If access from non-root users is required, root users must change the mode to 0755. 
 sudo chmod 0755 /nfsdata
