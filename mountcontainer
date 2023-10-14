@@ -34,8 +34,11 @@ sudo visudo
 #Append the following entry so you can run all commands without a password.
 #<Your_Account_Name> ALL = (ALL) NOPASSWD: ALL
 
-#give write and read permissions
-chmod -R g-w,o-wx /nfsdata
+#Add user to Sudoers group
+usermod -aG sudo newuser
 
-# need to use sudo when accesign /nfsdata
+#give write and read permissions
+sudo chown -R newuser: /nfsdata
+
+# need to use sudo when accessing /nfsdata
 sudo cp -f sourcedir targetdir.
