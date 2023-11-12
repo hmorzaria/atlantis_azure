@@ -60,7 +60,8 @@ sudo apt-get -y --no-install-recommends install \
 sudo apt-get install -y subversion make
 
 cd /tmp
-svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/
+svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/ --non-interactive --trust-server-cert-failures unknown-ca,cn-mismatch,expired,not-yet-valid,other
+
 
 cd /tmp/proj/nad
 sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
