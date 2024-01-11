@@ -1,6 +1,4 @@
-#https://community.rstudio.com/t/rstudio-server-hangs-after-user-loging-in/10781
+# Remove .Rprofile and .Renviron, .Rhistory /.rstudio from users home directories
+#https://stackoverflow.com/questions/15351405/fresh-new-session-for-rstudio-server
+#rename ~/.local/share/rstudio/ and restart rstudio server session
 
-Restart Rstudio server
-Upgrade Rstudio server to latest version
-Remove .Rprofile and .Renviron, .Rhistory /.rstudio from users home directories
-Remove rstudio-rsession from /tmp directory
