@@ -1,0 +1,77 @@
+#Set up secure https for VM
+Open source RStudio Server does not support HTTPS. So you need to use a reverse proxy like NGINX
+
+### 1. Tutorial for NGINX
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+### 2. Configure NGINX as a reverse proxy
+https://docs.posit.co/ide/server-pro/access_and_security/running_with_a_proxy.html#nginx-configuration
+
+#set up DNS record with
+https://portal.azure.com/#view/Microsoft_Azure_Network/AliasRecordSetCreateBlade/recordSetType~/0
+
+
+#ORIGINAL post, does not work but comments directed to solution
+https://techcommunity.microsoft.com/t5/educator-developer-blog/hosting-rserver-and-rstudio-on-azure/ba-p/744389
+
+
+In the Network properties for the Azure Portal set up an inbound rule for port 443 (for https)
+In the Configuration window for the static-IP add a DNS name, save and refresh (will take a few minutes to propagate)
+
+  `sudo apt install apache2`
+
+  `cd /etc/apache2/sites-available`
+
+Next create a file called rstudio.conf. Using your favourite text editor, e.g. vim or nano. Note that this file is very much space sensitive, so check it carefully.
+ServerName is the DNS name from the Azure portal
+Note this was modified from original instructions (which no longer work)
+
+
+ `ServerAdmin email@myemail.com
+  ServerName myDNSname.<zone>.cloudapp.azure.com
+  
+
+  # Specify path for Logs
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  RewriteEngine on
+
+  # Following lines should open rstudio directly from the url
+  # Map rstudio to rstudio/
+  RedirectMatch ^/rstudio$ /rstudio/
+
+  RewriteCond %{HTTP:Upgrade} =websocket
+  RewriteRule /rstudio/(.*) ws://localhost:8787/$1 [P,L]
+  RewriteCond %{HTTP:Upgrade}     !=websocket
+  RewriteRule /rstudio/(.*) http://localhost:8787/$1 [P,L]
+  ProxyPass /rstudio/     http://localhost:8787/
+  ProxyPassReverse /rstudio/ http://localhost:8787/
+  ProxyRequests off`
+
+Then enable the necessary Apache modules
+
+  `sudo a2enmod proxy
+   sudo a2enmod proxy_http
+   sudo a2enmod proxy_html
+   sudo a2enmod proxy_wstunnel
+   sudo a2enmod rewrite
+   systemctl restart apache2`
+
+
+The used https://certbot.eff.org/instructions?ws=apache&os=ubuntubionic
+Install snapd https://snapcraft.io/docs/installing-snap-on-ubuntu
+
+   `sudo apt update
+    sudo apt install snapd`
+
+To test your system, install the hello-world snap and make sure it runs correctly:
+
+  `sudo snap install hello-world`
+hello-world 6.4 from Canonical✓ installed
+  `hello-world`
+Hello World!
+
+Remove certbot in case it is installed
+  `sudo apt-get remove certbot`
+Install certbot
+`sudo snap install --classic certbot`
