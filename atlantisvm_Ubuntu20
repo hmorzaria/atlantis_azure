@@ -108,8 +108,8 @@ sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 echo "Install R studio" 
 
 sudo apt-get install gdebi-core -y
-wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2023.09.1-494-amd64.deb
-sudo gdebi rstudio-server-2023.09.1-494-amd64.deb
+wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2023.12.1-402-amd64.deb
+sudo gdebi rstudio-server-2023.12.1-402-amd64.deb
 echo "Install AzCopy" 
 
 #to uninstall azcopy use https://github.com/MicrosoftDocs/azure-docs/issues/18771
