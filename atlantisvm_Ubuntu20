@@ -61,8 +61,6 @@ sudo apt-get install -y subversion make
 
 cd /tmp
 svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/ --non-interactive --trust-server-cert-failures unknown-ca,cn-mismatch,expired,not-yet-valid,other
-
-
 cd /tmp/proj/nad
 sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
 
@@ -136,7 +134,6 @@ echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsof
     sudo tee /etc/apt/sources.list.d/azure-cli.list
     
 sudo apt-get update
-sudo apt-get install azure-cli
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
 fi
