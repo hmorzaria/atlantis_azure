@@ -47,6 +47,7 @@ sudo apt-get -y --no-install-recommends install \
     texlive-latex-extra \
     nco \
     cdo \
+    unzip \
     gfortran
  
 #use this to install Proj4 which is required for Atlantis 
