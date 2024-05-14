@@ -21,7 +21,10 @@ atlantis.scenarios <- foreach(this.index=folder.length, .verbose = TRUE) %dopar%
 system("sudo chmod +x atlantisrunbash.sh; sudo sh ./atlantisrunbash.sh"), wait = TRUE)
   
   done <- as.data.frame("done")
-}
+#use Azcopy to transfer results to blob storage
 
+  azcopy copy "./atlantis_run_folder_1/outputFiles" "https://thisstorageaccount.blob.core.windows.net/atlantis_run_folder_1?SAS keyXXXXXXXX"--recursive
+
+}
 
 stopCluster(cl)
