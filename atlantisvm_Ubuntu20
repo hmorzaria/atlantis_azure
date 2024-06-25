@@ -11,6 +11,7 @@ sudo apt-get dist-upgrade -y
 sudo apt-get -y --no-install-recommends install \
     autoconf \
     automake \
+    build-essential \
     libcurl4 \
     libcurl4-openssl-dev \
     curl \
