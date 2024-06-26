@@ -15,9 +15,11 @@ sudo apt-get -y --no-install-recommends install \
     libcurl4 \
     libcurl4-openssl-dev \
     curl \
+    cargo \
     gdal-bin \
     flip \
     libcairo2 \
+    libavfilter-dev \
     libharfbuzz-dev \
     libfribidi-dev \
     libcairo-5c0 \
