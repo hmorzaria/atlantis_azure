@@ -24,6 +24,7 @@ sudo apt-get -y --no-install-recommends install \
     libapparmor1 \
     libhdf5-dev \
     libnetcdf-dev \
+    libudunits2-dev \
     libxml2-dev \
     libssl-dev \
     libv4l-0 \
