@@ -57,7 +57,7 @@ sudo apt-get -y --no-install-recommends install \
     unzip \
     gfortran
  
-sudo apt-get install  proj-bin libproj-dev if present
+sudo apt-get install  proj-bin libproj-dev
 
 #to remove a respository https://askubuntu.com/questions/866901/what-can-i-do-if-a-repository-ppa-does-not-have-a-release-file
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
@@ -93,10 +93,18 @@ sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
 echo "Install R studio" 
 
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+
+echo "deb http://security.ubuntu.com/ubuntu noble-security main" | sudo tee /etc/apt/sources.list.d/noble-security.list
+sudo apt-get update
+sudo apt-get install libssl1.1
+
 sudo apt-get install gdebi-core -y
-wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2024.12.1-563-amd64.deb
-sudo gdebi rstudio-server-2024.12.1-563-amd64.deb
-echo "Install Rstudio" 
+wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2025.05.1-513-amd64.deb
+sudo gdebi rstudio-server-2025.05.1-513-amd64.deb
+
+echo "Install azcopy" 
 
 #to uninstall azcopy use https://github.com/MicrosoftDocs/azure-docs/issues/18771
 wget -O azcopy_linux_amd64_10.20.1.tar https://aka.ms/downloadazcopy-v10-linux
