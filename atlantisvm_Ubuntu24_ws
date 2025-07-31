@@ -64,19 +64,18 @@ sudo apt-get -y --no-install-recommends install \
 #look for proj with locate libproj.so
 # sudo apt install mlocate
 
-cd /usr/include/libxml2 && sudo cp -R libxml/ ../
+#cd /usr/include/libxml2 && sudo cp -R libxml/ ../
  
-sudo apt-get install -y subversion make
+#sudo apt-get install -y subversion make
 
-cd /tmp
-svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/ --non-interactive --trust-server-cert-failures unknown-ca,cn-mismatch,expired,not-yet-valid,other
-cd /tmp/proj/nad
-sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
+#cd /tmp
+#svn co http://svn.osgeo.org/metacrs/proj/branches/4.8/proj/ --non-interactive --trust-server-cert-failures unknown-ca,cn-mismatch,expired,not-yet-valid,other
+#cd /tmp/proj/nad
+#sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
 
-unzip -o -q proj-datumgrid-1.5.zip
+#unzip -o -q proj-datumgrid-1.5.zip
 
 #make distclean
-
 cd /tmp/proj/
 
 ./configure  &&  make  &&  sudo make install && sudo ldconfig 
@@ -117,12 +116,13 @@ sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_
 sudo apt install --no-install-recommends r-base -y
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 
-echo "Install R studio" 
+echo "Install Rstudio" 
 
 sudo apt-get install gdebi-core -y
-wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2024.12.1-563-amd64.deb
-sudo gdebi rstudio-server-2024.12.1-563-amd64.deb
-echo "Install Rstudio" 
+wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2025.05.1-513-amd64.deb
+sudo gdebi rstudio-server-2025.05.1-513-amd64
+
+echo "Install AZ copy" 
 
 #to uninstall azcopy use https://github.com/MicrosoftDocs/azure-docs/issues/18771
 wget -O azcopy_linux_amd64_10.20.1.tar https://aka.ms/downloadazcopy-v10-linux
