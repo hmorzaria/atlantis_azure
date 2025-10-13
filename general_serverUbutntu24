@@ -87,14 +87,14 @@ sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+ -y
 echo "Install Rstudio" 
 
 sudo apt-get install gdebi-core -y
-wget https://download2.rstudio.org/server/focal/amd64/rstudio-server-2025.05.1-513-amd64.deb
-sudo gdebi rstudio-server-2025.05.1-513-amd64
+wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2025.09.1-401-amd64.deb
+sudo gdebi rstudio-server-2025.09.1-401-amd64.deb
 
 echo "Install AZ copy" 
 
 #to uninstall azcopy use https://github.com/MicrosoftDocs/azure-docs/issues/18771
-wget -O azcopy_linux_amd64_10.20.1.tar https://aka.ms/downloadazcopy-v10-linux
-tar -xzf azcopy_linux_amd64_10.20.1.tar
+wget -O azcopy_linux_amd64_10.30.1.tar https://aka.ms/downloadazcopy-v10-linux
+tar -xzf azcopy_linux_amd64_10.30.1.tar
 sudo cp ./azcopy_linux_amd64_*/azcopy /usr/bin/
 
 echo "Install AzCLI"
@@ -114,6 +114,8 @@ echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsof
     sudo tee /etc/apt/sources.list.d/azure-cli.list
     
 sudo apt-get update
+sudo apt-get install azure-cli
+
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
 fi
