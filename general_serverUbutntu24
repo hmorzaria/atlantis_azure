@@ -20,6 +20,7 @@ sudo apt-get -y --no-install-recommends install \
     libcurl4-openssl-dev \
     curl \
     cargo \
+    cmake \
     gdal-bin \
     flip \
     libcairo2 \
@@ -55,13 +56,13 @@ sudo apt-get -y --no-install-recommends install \
     nco \
     cdo \
     unzip \
-    gfortran \ 
-   proj-bin \
-   libproj-dev \
-   libudunits2-dev \
-   libgdal-dev \ 
-   libgeos-dev \
-  libjq-dev
+    gfortran \
+    proj-bin \
+    libproj-dev \
+    libudunits2-dev \
+    libgdal-dev \
+    libgeos-dev \
+    libjq-dev
 
 sudo apt-get -f install -y # missing dependencies
 sudo apt autoremove -y #unused packages
