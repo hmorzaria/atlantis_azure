@@ -65,7 +65,18 @@ sudo apt-get -y --no-install-recommends install \
 #look for proj with locate libproj.so
 # sudo apt install mlocate
 #cd /usr/include/libxml2 && sudo cp -R libxml/ ../
- 
+
+#this proj installation solves the error "configure: error: cannot guess build type; you must specify one"
+#That specific error happens because the config.guess and config.sub scripts packaged inside PROJ 4.8.0 are from ~2012. 
+#They are so old that they literally don't recognize modern 64-bit Linux architectures used by Ubuntu 24.04.
+
+# 1. Install GNU autotools helpers
+sudo apt update
+sudo apt install -y autotools-dev build-essential
+
+make
+sudo make install
+sudo ldconfig
 sudo apt-get install -y subversion make
 
 cd /tmp
@@ -75,10 +86,15 @@ sudo wget http://download.osgeo.org/proj/proj-datumgrid-1.5.zip
 
 unzip -o -q proj-datumgrid-1.5.zip
 
-make distclean
-cd /tmp/proj/
+# 2. Go to your proj directory
+cd /tmp/proj 
 
-./configure  &&  make  &&  sudo make install && sudo ldconfig 
+# 3. Overwrite the ancient build scripts with Ubuntu 24.04's modern versions
+cp -f /usr/share/misc/config.guess .
+cp -f /usr/share/misc/config.sub .
+
+# 4. Configure with legacy C flags and compile
+./configure CFLAGS="-O2 -std=gnu89 -w"
  
 #these might be needed to install spatial R programs but can conflict with Atlantis proj4
 
